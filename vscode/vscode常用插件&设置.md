@@ -55,6 +55,7 @@
 
 - 语言支持：`C/C++` 或 `clangd`
 - 编译工具：`CMake Tools` 或 `xmake`
+- CMake格式化：`CMake Language Support`
 
 
 ### 特定文件格式
