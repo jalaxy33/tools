@@ -23,22 +23,26 @@ if status is-interactive
 
     # aliases
     alias vi="vim"
+    alias nv="nvim"
     alias hx="helix"
     alias ls="eza --icons --git -a"
     alias cd="z"
     alias rsyncp="rsync -alvhP"
 
-    alias vifish="vim ~/.config/fish/config.fish"
+    alias vifish="vi ~/.config/fish/config.fish"
+    alias nvfish="nv ~/.config/fish/config.fish"
     alias hxfish="hx ~/.config/fish/config.fish"
     alias catfish="cat ~/.config/fish/config.fish"
     alias batfish="bat ~/.config/fish/config.fish"
 
-    alias vibash="vim ~/.bashrc"
+    alias vibash="vi ~/.bashrc"
+    alias nvbash="nv ~/.bashrc"
     alias hxbash="hx ~/.bashrc"
     alias catbash="cat ~/.bashrc"
     alias batbash="bat ~/.bashrc"
 
-    alias vizsh="vim ~/.zshrc"
+    alias vizsh="vi ~/.zshrc"
+    alias nvzsh="nv ~/.zshrc"
     alias hxzsh="hx ~/.zshrc"
     alias catzsh="cat ~/.zshrc"
     alias batzsh="bat ~/.zshrc"

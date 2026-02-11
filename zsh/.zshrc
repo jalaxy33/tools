@@ -42,28 +42,33 @@ eval "$(zoxide init zsh)"
 source <(fzf --zsh)
 
 # more aliases
-alias vi="nvim"
+alias vi="vim"
+alias nv="nvim"
 alias hx="helix"
 alias ls="eza --icons --git -a"
 alias cd="z"
 alias rsyncp="rsync -alvhP"
 
 alias vizsh="vi ~/.zshrc"
+alias nvzsh="nv ~/.zshrc"
 alias hxzsh="hx ~/.zshrc"
 alias catzsh="cat ~/.zshrc"
 alias batzsh="bat ~/.zshrc"
 
 alias vizim="vi ~/.zimrc"
+alias nvzim="nv ~/.zimrc"
 alias hxzim="hx ~/.zimrc"
 alias catzim="cat ~/.zimrc"
 alias batzim="bat ~/.zimrc"
 
 alias vibash="vi ~/.bashrc"
+alias nvbash="nv ~/.bashrc"
 alias hxbash="hx ~/.bashrc"
 alias catbash="cat ~/.bashrc"
 alias batbash="bat ~/.bashrc"
 
 alias vifish="vi ~/.config/fish/config.fish"
+alias nvfish="nv ~/.config/fish/config.fish"
 alias hxfish="hx ~/.config/fish/config.fish"
 alias catfish="cat ~/.config/fish/config.fish"
 alias batfish="bat ~/.config/fish/config.fish"
