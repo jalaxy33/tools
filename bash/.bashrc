@@ -56,23 +56,23 @@ eval "$(fzf --bash)"
 
 
 # more aliases
-alias vi="vim"
+alias vi="nvim"
 alias hx="helix"
 alias ls="eza --icons --git -a"
 alias cd="z"
 alias rsyncp="rsync -alvhP"
 
-alias vibash="vim ~/.bashrc"
+alias vibash="vi ~/.bashrc"
 alias hxbash="hx ~/.bashrc"
 alias catbash="cat ~/.bashrc"
 alias batbash="bat ~/.bashrc"
 
-alias vizsh="vim ~/.zshrc"
+alias vizsh="vi ~/.zshrc"
 alias hxzsh="hx ~/.zshrc"
 alias catzsh="cat ~/.zshrc"
 alias batzsh="bat ~/.zshrc"
 
-alias vifish="vim ~/.config/fish/config.fish"
+alias vifish="vi ~/.config/fish/config.fish"
 alias hxfish="hx ~/.config/fish/config.fish"
 alias catfish="cat ~/.config/fish/config.fish"
 alias batfish="bat ~/.config/fish/config.fish"
@@ -105,12 +105,10 @@ export GOPROXY="https://mirrors.tencent.com/go/"
 
 # config yazi
 function y() {
-    local tmp
-    tmp=$(mktemp -t "yazi-cwd.XXXXXX")
-    yazi "$@" --cwd-file="$tmp"
-    if read -r -z cwd < "$tmp" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
-        builtin cd -- "$cwd"
-    fi
+    local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
+    command yazi "$@" --cwd-file="$tmp"
+    IFS= read -r -d '' cwd < "$tmp"
+    [ "$cwd" != "$PWD" ] && [ -d "$cwd" ] && builtin cd -- "$cwd"
     rm -f -- "$tmp"
 }
 
