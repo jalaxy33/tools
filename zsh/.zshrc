@@ -8,6 +8,10 @@
 #  - bat, helix, rsync
 
 
+# Reference:
+#   - https://www.bilibili.com/video/BV1fdTfzeE8X/
+
+
 # -- zimfw 
 
 ZIM_HOME=${ZDOTDIR:-${HOME}}/.zim
@@ -22,6 +26,13 @@ source ${ZIM_HOME}/init.zsh
 # Modules configuration
 ZSH_AUTOSUGGEST_MANUAL_REBIND=1
 
+
+# -- Homebrew init
+
+# try to activate homebrew
+if [[ -x "/home/linuxbrew/.linuxbrew/bin/brew" ]]; then
+    eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+fi
 
 
 # -- General Configs
@@ -76,6 +87,8 @@ fi
 export GOPROXY="https://mirrors.tencent.com/go/"
 
 
+# -- Functions
+
 # config yazi
 function y() {
     local tmp
@@ -113,7 +126,7 @@ function unset_proxy() {
 }
 
 
-# Other functions
+# other functions
 function clear_claude() {
     rm -rf ~/.claude/{cache,debug,projects,shell-snapshots,statsig,telemetry,todos,file-history,plans,history.jsonl,session-env}
     echo "claude history cleared."
@@ -126,10 +139,21 @@ function clear_claude() {
 # Set lazygit keybinding
 function lazygit_widget() {
     lazygit
-    zle reser-prompt
+    zle reset-prompt
 }
 
 zle -N lazygit_widget
 bindkey '^g' lazygit_widget
+
+
+# Set yazi keybinding
+function yazi_widget() {
+    y
+    zle reset-prompt
+}
+
+zle -N yazi_widget
+bindkey '^y' yazi_widget
+
 
 
