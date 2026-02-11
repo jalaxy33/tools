@@ -1,4 +1,12 @@
 # ~/.config/fish/config.fish
+#
+# Necessary:
+#  - fish, starship, vim
+#  - zoxide, fzf, eza, yazi
+#
+# Optional but useful:
+#  - bat, helix, rsync
+
 
 if status is-interactive
     set fish_greeting ""
@@ -30,6 +38,11 @@ if status is-interactive
     alias catbash="cat ~/.bashrc"
     alias batbash="bat ~/.bashrc"
 
+    alias vizsh="vim ~/.zshrc"
+    alias hxzsh="hx ~/.zshrc"
+    alias catzsh="cat ~/.zshrc"
+    alias batzsh="bat ~/.zshrc"
+
     # homebrew mirror
     set -x HOMEBREW_BREW_GIT_REMOTE "https://mirrors.ustc.edu.cn/brew.git"
     set -x HOMEBREW_CORE_GIT_REMOTE "https://mirrors.ustc.edu.cn/homebrew-core.git"
@@ -53,6 +66,17 @@ if status is-interactive
     set -x GOPROXY "https://mirrors.tencent.com/go/"
 
 end
+
+# config yazi
+function y
+    set tmp (mktemp -t "yazi-cwd.XXXXXX")
+    yazi $argv --cwd-file="$tmp"
+    if read -z cwd < "$tmp"; and [ -n "$cwd" ]; and [ "$cwd" != "$PWD" ]
+            builtin cd -- "$cwd"
+    end
+    rm -f -- "$tmp"
+end
+
 
 # proxy functions
 function set_proxy
@@ -80,17 +104,9 @@ end
 
 
 # other functions
-function y
-    set tmp (mktemp -t "yazi-cwd.XXXXXX")
-    yazi $argv --cwd-file="$tmp"
-    if read -z cwd < "$tmp"; and [ -n "$cwd" ]; and [ "$cwd" != "$PWD" ]
-            builtin cd -- "$cwd"
-    end
-    rm -f -- "$tmp"
-end
-
 function clear_claude
     rm -rf ~/.claude/{cache,debug,projects,shell-snapshots,statsig,telemetry,todos,file-history,plans,history.jsonl,session-env}
     echo "claude history cleared."
 end
+
 

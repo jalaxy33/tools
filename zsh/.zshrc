@@ -1,59 +1,34 @@
-# ~/.bashrc
+# ~/.zshrc
 #
-# Necessary:
-#  - bash, vim
-#  - zoxide, fzf, eza, yazi
+# Necessary: 
+#  - zsh, zimfw, vim
+#  - zoxide, fzf, eza, yazi, lazygit
 #
 # Optional but useful:
 #  - bat, helix, rsync
 
 
-# If not running interactively, don't do anything
-[[ $- != *i* ]] && return
+# -- zimfw 
 
-
-# prompt format
-PS1='[\u@\h \W]\$ '
-
-
-# history related settings
-## ignore duplicate lines and space in the history.
-HISTCONTROL=ignoredups:ignorespace
-
-## append to the history file, don't overwrite it
-shopt -s histappend
-
-## for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
-HISTSIZE=50
-HISTFILESIZE=100
-
-
-# color support
-alias ls='ls --color=auto'
-alias grep='grep --color=auto'
-alias fgrep='fgrep --color=auto'
-alias egrep='egrep --color=auto'
-alias dir='dir --color=auto'
-alias vdir='vdir --color=auto'
-
-
-# ls aliases
-alias ll='ls -alF'
-alias la='ls -A'
-alias l='ls -CF'
-
-
-# try to activate homebrew
-if [[ -x "/home/linuxbrew/.linuxbrew/bin/brew" ]]; then
-    eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+ZIM_HOME=${ZDOTDIR:-${HOME}}/.zim
+# Install missing modules and update ${ZIM_HOME}/init.zsh if missing or outdated.
+if [[ ! ${ZIM_HOME}/init.zsh -nt ${ZIM_CONFIG_FILE:-${ZDOTDIR:-${HOME}}/.zimrc} ]]; then
+  source /usr/share/zimfw/zimfw.zsh init
 fi
 
+# Initialize modules.
+source ${ZIM_HOME}/init.zsh
+
+# Modules configuration
+ZSH_AUTOSUGGEST_MANUAL_REBIND=1
+
+
+
+# -- General Configs
 
 # startup apps
-eval "$(starship init bash)"
-eval "$(zoxide init bash)"
-eval "$(fzf --bash)"
-
+eval "$(zoxide init zsh)"
+source <(fzf --zsh)
 
 # more aliases
 alias vi="vim"
@@ -62,27 +37,25 @@ alias ls="eza --icons --git -a"
 alias cd="z"
 alias rsyncp="rsync -alvhP"
 
-alias vibash="vim ~/.bashrc"
-alias hxbash="hx ~/.bashrc"
-alias catbash="cat ~/.bashrc"
-alias batbash="bat ~/.bashrc"
-
 alias vizsh="vim ~/.zshrc"
 alias hxzsh="hx ~/.zshrc"
 alias catzsh="cat ~/.zshrc"
 alias batzsh="bat ~/.zshrc"
 
+alias vizim="vim ~/.zimrc"
+alias hxzim="hx ~/.zimrc"
+alias catzim="cat ~/.zimrc"
+alias batzim="bat ~/.zimrc"
+
+alias vibash="vim ~/.bashrc"
+alias hxbash="hx ~/.bashrc"
+alias catbash="cat ~/.bashrc"
+alias batbash="bat ~/.bashrc"
+
 alias vifish="vim ~/.config/fish/config.fish"
 alias hxfish="hx ~/.config/fish/config.fish"
 alias catfish="cat ~/.config/fish/config.fish"
 alias batfish="bat ~/.config/fish/config.fish"
-
-
-# Homebrew mirror
-export HOMEBREW_BREW_GIT_REMOTE="https://mirrors.ustc.edu.cn/brew.git"
-export HOMEBREW_CORE_GIT_REMOTE="https://mirrors.ustc.edu.cn/homebrew-core.git"
-export HOMEBREW_BOTTLE_DOMAIN="https://mirrors.ustc.edu.cn/homebrew-bottles"
-export HOMEBREW_API_DOMAIN="https://mirrors.ustc.edu.cn/homebrew-bottles/api"
 
 
 # config rust
@@ -96,7 +69,7 @@ fi
 # config nodejs
 export FNM_NODE_DIST_MIRROR="https://npmmirror.com/mirrors/node/"
 if command -v fnm >/dev/null 2>&1; then
-    eval "$(fnm env --use-on-cd --shell bash)"
+    eval "$(fnm env --use-on-cd --shell zsh)"
 fi
 
 # config go
@@ -140,10 +113,23 @@ function unset_proxy() {
 }
 
 
-# other functions
+# Other functions
 function clear_claude() {
     rm -rf ~/.claude/{cache,debug,projects,shell-snapshots,statsig,telemetry,todos,file-history,plans,history.jsonl,session-env}
     echo "claude history cleared."
 }
+
+
+
+# -- Zsh-specific
+
+# Set lazygit keybinding
+function lazygit_widget() {
+    lazygit
+    zle reser-prompt
+}
+
+zle -N lazygit_widget
+bindkey '^g' lazygit_widget
 
 
