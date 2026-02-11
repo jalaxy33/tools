@@ -5,7 +5,7 @@
 #  - zoxide, fzf, eza, yazi, lazygit
 #
 # Optional but useful:
-#  - bat, helix, rsync
+#  - bat, helix, rsync, neovim
 
 
 # Reference:

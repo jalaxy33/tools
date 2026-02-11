@@ -5,7 +5,7 @@
 #  - zoxide, fzf, eza, yazi
 #
 # Optional but useful:
-#  - bat, helix, rsync
+#  - bat, helix, rsync, neovim
 
 
 # If not running interactively, don't do anything
