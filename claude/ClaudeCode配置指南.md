@@ -201,3 +201,14 @@ vim ~/.claude.json
 
 - [code-simplifier](https://github.com/anthropics/claude-plugins-official/tree/main/plugins/code-simplifier)
 - [superpowers](https://github.com/obra/superpowers)
+
+### Agent skills
+
+Agent skills 是最近很火的一种 AI 工作流概念，能够告诉智能体在特定场景下"如何组合使用这些工具"。可以参考[官方文档](https://code.claude.com/docs/en/skills)来学习如何编写和使用 skills。
+
+推荐的参考资料：
+
+- 官方文档：[skills](https://code.claude.com/docs/en/skills)
+- 视频：[彻底搞懂Agent skill！从概念到实战，上手玩转skill](https://www.bilibili.com/video/BV182z5BRE4f/)
+- 视频：[手把手彻底学会 Agent Skills！【小白教程】](https://www.bilibili.com/video/BV1G3FNznEiS/)
+- 博客：[Agent Skills 与 MCP：智能体能力扩展的两种范式](https://github.com/datawhalechina/hello-agents/blob/main/Extra-Chapter/Extra05-AgentSkills%E8%A7%A3%E8%AF%BB.md)
