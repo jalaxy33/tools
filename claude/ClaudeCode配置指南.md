@@ -3,8 +3,6 @@
 1. 使用 CLI 命令行工具
 2. 在 IDE 中使用
 
-我的配置文件可以在[这里](https://github.com/jalaxy33/.configs/tree/main/.claude)找到。
-
 ## 开源模型推荐
 
 如果想使用开源模型，目前推荐这些（2026/02/01）：
@@ -16,11 +14,12 @@
 
 具体情况可以参考[这个视频](https://www.bilibili.com/video/BV1QLiiByEqz/)。
 
-## 使用CLI工具
+## 命令行工具
 
 ### 安装 Claude Code
 
-按照说明[安装 Claude Code](https://code.claude.com/docs/en/setup)。之后运行一次命令生成配置文件：
+按照说明[安装 Claude Code](https://code.claude.com/docs/en/setup)。
+之后运行一次命令生成配置文件：
 
 ```sh
 claude
@@ -44,11 +43,13 @@ vim ~/.claude.json
 }
 ```
 
-### 使用官方服务
+### 配置 API Key
+
+#### 选项一：使用官方服务
 
 如果购买了官方的服务，运行 `claude` 命令 > 输入 `/login` 登录。
 
-### 使用开源模型
+#### 选项二：使用开源模型
 
 目前大部分的模型都提供了 Anthropic API 接入方式，请查询对应的 API 文档。
 
@@ -151,64 +152,3 @@ vim ~/.claude.json
         "claudeCode.preferredLocation": "sidebar",
     }
     ```
-
-## 其他使用技巧
-
-### 删除历史对话记录
-
-- 删除某个历史对话
-
-    ```sh
-    claude
-    ```
-
-    ```sh​
-    /resume  # 选择对话
-    /clear   # 清除历史记录
-    ```
-
-- 删除所有历史记录
-
-    删除 `~/.claude/` 目录下的以下文件和文件夹：
-
-    ```sh
-    rm -rf ~/.claude/{cache,debug,projects,shell-snapshots,statsig,telemetry,todos,file-history,plans,history.jsonl,session-env}
-    ```
-
-### 安装插件
-
-1. 运行 claude
-
-    ```sh
-    claude
-    ```
-
-2. （可选）添加官方插件商城
-
-    ```
-    /plugin
-    ```
-
-    按右箭头选中 `Marketplaces` 标签，选择 「+ Add Marketplace」回车，输入仓库名称后回车：
-
-    ```
-    anthropics/claude-plugins-official
-    ```
-
-3. 然后就可以用 `/plugin install <插件名>` 或者在 `/plugin` > `Discover` 下安装插件了。
-
-**插件推荐**：
-
-- [code-simplifier](https://github.com/anthropics/claude-plugins-official/tree/main/plugins/code-simplifier)
-- [superpowers](https://github.com/obra/superpowers)
-
-### Agent skills
-
-Agent skills 是最近很火的一种 AI 工作流概念，能够告诉智能体在特定场景下"如何组合使用这些工具"。可以参考[官方文档](https://code.claude.com/docs/en/skills)来学习如何编写和使用 skills。
-
-推荐的参考资料：
-
-- 官方文档：[skills](https://code.claude.com/docs/en/skills)
-- 视频：[彻底搞懂Agent skill！从概念到实战，上手玩转skill](https://www.bilibili.com/video/BV182z5BRE4f/)
-- 视频：[手把手彻底学会 Agent Skills！【小白教程】](https://www.bilibili.com/video/BV1G3FNznEiS/)
-- 博客：[Agent Skills 与 MCP：智能体能力扩展的两种范式](https://github.com/datawhalechina/hello-agents/blob/main/Extra-Chapter/Extra05-AgentSkills%E8%A7%A3%E8%AF%BB.md)
