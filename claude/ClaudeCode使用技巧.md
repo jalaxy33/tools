@@ -1,8 +1,20 @@
 
-一些有用的参考资料：
+## 有用的参考资料
 
-- [官方文档](https://code.claude.com/docs/en/overview)
+- 官方文档：
+  - 介绍：[Overview](https://code.claude.com/docs/en/overview)、[Quick start](https://code.claude.com/docs/en/quickstart)、[How Claude Code Work](https://code.claude.com/docs/en/how-claude-code-works)
+  - 最佳实践：[Best practices](https://code.claude.com/docs/en/best-practices)、[Common workflows](https://code.claude.com/docs/en/common-workflows)、[tips for working effectively](https://code.claude.com/docs/en/how-claude-code-works#work-effectively-with-claude-code)、[
+Reduce token usage](https://code.claude.com/docs/en/costs#reduce-token-usage)
+  - 工具链：[Extend Claude Code](https://code.claude.com/docs/en/features-overview)、[Tools available to Claude](https://code.claude.com/docs/en/settings#tools-available-to-claude)、[skills](https://code.claude.com/docs/en/skills)、[subagents](https://code.claude.com/docs/en/sub-agents)、[plugins](https://code.claude.com/docs/en/discover-plugins)、[hooks](https://code.claude.com/docs/en/hooks-guide)
+  - 权限管理：[Permissions](https://code.claude.com/docs/en/permissions)、[Sandboxing](https://code.claude.com/docs/en/sandboxing)、[permissions and sandboxing](https://code.claude.com/docs/en/permissions#how-permissions-interact-with-sandboxing)
+  - 详细配置：[CLI reference](https://code.claude.com/docs/en/cli-reference)、[Settings](https://code.claude.com/docs/en/settings)、[Hooks reference](https://code.claude.com/docs/en/hooks)
+
 - [smithery](https://smithery.ai/)：MCP和skills的资源库。
+
+<div style="text-align: center;">
+  <img src="https://mintcdn.com/claude-code/ELkJZG54dIaeldDC/images/context-loading.svg?w=1100&fit=max&auto=format&n=ELkJZG54dIaeldDC&q=85&s=9844c55d08d2c386672447f2e8518669" alt="CC-features" style="width: 80%;">
+  <p style="text-align: center; color: gray; font-size: 0.9em;">Claude Code 工具链</p>
+</div>
 
 ## 删除历史对话记录
 
@@ -12,7 +24,7 @@
     claude
     ```
 
-    ```sh​
+    ```sh
     /resume  # 选择对话
     /clear   # 清除历史记录
     ```
@@ -51,10 +63,12 @@
 
 - [code-simplifier](https://github.com/anthropics/claude-plugins-official/tree/main/plugins/code-simplifier)
 - [superpowers](https://github.com/obra/superpowers)
+- [github](https://github.com/anthropics/claude-plugins-official/tree/main/external_plugins/github)
+- 编程语言相关的插件，搜索 `lsp`，如：`pyright`（python）、`rust-analyzer`（rust）、`clangd-lsp`（c/c++）等。
 
-## 创建 sub agent
+## 创建subagent
 
-可以参考[这个视频](https://www.bilibili.com/video/BV1zqeMzfEiQ)来学习如何使用 Claude Code 创建和使用 Agent。
+可以参考[这个视频](https://www.bilibili.com/video/BV1zqeMzfEiQ)和[官方文档](https://code.claude.com/docs/en/sub-agents)来学习如何使用 Claude Code 创建和使用 Agent。
 
 创建和使用方法：
 
@@ -64,7 +78,7 @@
 
 ## Agent skills
 
-Agent skills 是最近很火的一种 AI 工作流概念，能够告诉智能体在特定场景下"如何组合使用这些工具"。其核心设计理念是「渐进式披露」，避免一次性将过多内容塞入上下文窗口。可以参考[官方文档](https://code.claude.com/docs/en/skills)来学习如何编写和使用 skills。
+Agent skills 是最近很火的一种 AI 工作流概念，能够告诉智能体在特定场景下"如何组合使用这些工具"。其核心设计理念是「渐进式披露」和「按需加载」，避免一次性将过多内容塞入上下文窗口。可以参考[官方文档](https://code.claude.com/docs/en/skills)来学习如何编写和使用 skills。
 
 推荐的参考资料：
 
