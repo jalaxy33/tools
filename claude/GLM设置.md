@@ -1,5 +1,5 @@
 
-模型名称：`GLM-4.7`
+模型名称：`glm-5`
 
 **注：请将 `"ANTHROPIC_AUTH_TOKEN"` 字段更换为自己的 API key**。
 
@@ -11,11 +11,11 @@
       "ANTHROPIC_AUTH_TOKEN": "<YOUR_API_KEY>",
       "API_TIMEOUT_MS": "3000000",
       "CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC": 1,
-      "ANTHROPIC_MODEL": "glm-4.7",
-      "ANTHROPIC_SMALL_FAST_MODEL": "glm-4.7",
-      "ANTHROPIC_DEFAULT_SONNET_MODEL": "glm-4.7",
-      "ANTHROPIC_DEFAULT_OPUS_MODEL": "glm-4.7",
-      "ANTHROPIC_DEFAULT_HAIKU_MODEL": "glm-4.5-air"
+      "ANTHROPIC_MODEL": "glm-5",
+      "ANTHROPIC_SMALL_FAST_MODEL": "glm-5",
+      "ANTHROPIC_DEFAULT_SONNET_MODEL": "glm-5",
+      "ANTHROPIC_DEFAULT_OPUS_MODEL": "glm-5",
+      "ANTHROPIC_DEFAULT_HAIKU_MODEL": "glm-5"
     }
   }
   ```
@@ -24,7 +24,7 @@
   - 如果装了命令行工具，**保持默认就行**，也可以手动指定：
     ```json
     {
-      "claude-code.selectedModel": "glm-4.7",
+      "claude-code.selectedModel": "glm-5",
     }
     ```
   - 如果没装命令行工具： 
@@ -49,23 +49,23 @@
         },
         {
           "name": "ANTHROPIC_MODEL",
-          "value": "glm-4.7"
+          "value": "glm-5"
         },
         {
           "name": "ANTHROPIC_SMALL_FAST_MODEL",
-          "value": "glm-4.7"
+          "value": "glm-5"
         },
         {
           "name": "ANTHROPIC_DEFAULT_SONNET_MODEL",
-          "value": "glm-4.7"
+          "value": "glm-5"
         },
         {
           "name": "ANTHROPIC_DEFAULT_OPUS_MODEL",
-          "value": "glm-4.7"
+          "value": "glm-5"
         },
         {
           "name": "ANTHROPIC_DEFAULT_HAIKU_MODEL",
-          "value": "glm-4.5-air"
+          "value": "glm-5"
         }
       ],
     }

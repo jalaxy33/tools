@@ -9,7 +9,7 @@
 
 如果想使用开源模型，目前推荐这些（2026/02/01）：
 - [Deepseek V3.2](https://api-docs.deepseek.com/zh-cn/guides/anthropic_api)：极致性价比，擅长数学推理。缺点是幻觉率较高。
-- [GLM-4.7](http://docs.bigmodel.cn/cn/coding-plan/tool/claude-for-ide)：全能，擅长全栈开发、python，前端审美优秀，Agent能力强。缺点是稳定性有待提升。
+- [GLM-5](http://docs.bigmodel.cn/cn/coding-plan/tool/claude-for-ide)：全能，擅长全栈开发、python，前端审美优秀，Agent能力强。缺点是稳定性有待提升。
 - [MiniMax M2.1](https://platform.minimaxi.com/docs/guides/text-ai-coding-tools)：擅长后端开发（Rust/Go/Java/C++），屎山代码重构首选。缺点是反应速度较慢。
 - [Kimi K2.5](https://platform.moonshot.cn/docs/guide/kimi-k2-5-quickstart)：【待考查】支持视觉与文本多模态，提出了Agent Swarm功能（目前只能在网页端使用）。官方文档写得一般，编程能力有待考查。
 
@@ -152,10 +152,10 @@ vim ~/.claude.json
     ```
 - 删除所有历史记录
 
-    删除 `~/.claude/` 目录下除了 `settings.json` 外的所有文件
+    删除 `~/.claude/` 目录下的以下文件和文件夹：
 
     ```sh
-    find ~/.claude -mindepth 1 -not -name "settings.json" -delete
+    rm -rf ~/.claude/{cache,debug,projects,shell-snapshots,statsig,telemetry,todos,file-history,plans,history.jsonl,session-env}
     ```
 
 ### 安装插件
@@ -165,7 +165,7 @@ vim ~/.claude.json
     ```sh
     claude
     ```
-2. 添加官方插件商城
+2. （可选）添加官方插件商城
     ```
     /plugin
     ```
