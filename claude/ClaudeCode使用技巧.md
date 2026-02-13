@@ -1,20 +1,8 @@
 
-## 有用的参考资料
+- 有用的参考资料:
 
-- 官方文档：
-  - 介绍：[Overview](https://code.claude.com/docs/en/overview)、[Quick start](https://code.claude.com/docs/en/quickstart)、[How Claude Code Work](https://code.claude.com/docs/en/how-claude-code-works)
-  - 最佳实践：[Best practices](https://code.claude.com/docs/en/best-practices)、[Common workflows](https://code.claude.com/docs/en/common-workflows)、[tips for working effectively](https://code.claude.com/docs/en/how-claude-code-works#work-effectively-with-claude-code)、[
-Reduce token usage](https://code.claude.com/docs/en/costs#reduce-token-usage)
-  - 工具链：[Extend Claude Code](https://code.claude.com/docs/en/features-overview)、[Tools available to Claude](https://code.claude.com/docs/en/settings#tools-available-to-claude)、[skills](https://code.claude.com/docs/en/skills)、[subagents](https://code.claude.com/docs/en/sub-agents)、[plugins](https://code.claude.com/docs/en/discover-plugins)、[hooks](https://code.claude.com/docs/en/hooks-guide)
-  - 权限管理：[Permissions](https://code.claude.com/docs/en/permissions)、[Sandboxing](https://code.claude.com/docs/en/sandboxing)、[permissions and sandboxing](https://code.claude.com/docs/en/permissions#how-permissions-interact-with-sandboxing)
-  - 详细配置：[CLI reference](https://code.claude.com/docs/en/cli-reference)、[Settings](https://code.claude.com/docs/en/settings)、[Hooks reference](https://code.claude.com/docs/en/hooks)
-
-- [smithery](https://smithery.ai/)：MCP和skills的资源库。
-
-<div style="text-align: center;">
-  <img src="https://mintcdn.com/claude-code/ELkJZG54dIaeldDC/images/context-loading.svg?w=1100&fit=max&auto=format&n=ELkJZG54dIaeldDC&q=85&s=9844c55d08d2c386672447f2e8518669" alt="CC-features" style="width: 80%;">
-  <p style="text-align: center; color: gray; font-size: 0.9em;">Claude Code 工具链</p>
-</div>
+  - [官方文档](https://code.claude.com/docs/en/overview)
+  - [smithery](https://smithery.ai/)：MCP和skills的资源库。
 
 ## 删除历史对话记录
 
