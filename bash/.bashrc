@@ -88,11 +88,11 @@ alias batfish="bat $FISH_CONFIG"
 # niri aliases
 if command -v niri >/dev/null 2>&1; then
     NIRI_CONFIG="~/.config/niri/config.kdl"
-    alias vizsh="vi $ZSH_CONFIG"
-    alias nvzsh="nv $ZSH_CONFIG"
-    alias hxzsh="hx $ZSH_CONFIG"
-    alias catzsh="cat $ZSH_CONFIG"
-    alias batzsh="bat $ZSH_CONFIG"
+    alias viniri="vi $NIRI_CONFIG"
+    alias nvniri="nv $NIRI_CONFIG"
+    alias hxniri="hx $NIRI_CONFIG"
+    alias catniri="cat $NIRI_CONFIG"
+    alias batniri="bat $NIRI_CONFIG"
 fi
 
 
