@@ -41,7 +41,7 @@ fi
 eval "$(zoxide init zsh)"
 source <(fzf --zsh)
 
-# more aliases
+# aliases
 alias vi="vim"
 alias nv="nvim"
 alias hx="helix"
@@ -49,29 +49,51 @@ alias ls="eza --icons --git -a"
 alias cd="z"
 alias rsyncp="rsync -alvhP"
 
-alias vizsh="vi ~/.zshrc"
-alias nvzsh="nv ~/.zshrc"
-alias hxzsh="hx ~/.zshrc"
-alias catzsh="cat ~/.zshrc"
-alias batzsh="bat ~/.zshrc"
+ZSH_CONFIG="~/.zshrc"
+alias vizsh="vi $ZSH_CONFIG"
+alias nvzsh="nv $ZSH_CONFIG"
+alias hxzsh="hx $ZSH_CONFIG"
+alias catzsh="cat $ZSH_CONFIG"
+alias batzsh="bat $ZSH_CONFIG"
 
-alias vizim="vi ~/.zimrc"
-alias nvzim="nv ~/.zimrc"
-alias hxzim="hx ~/.zimrc"
-alias catzim="cat ~/.zimrc"
-alias batzim="bat ~/.zimrc"
+ZSH_CONFIG="~/.zimrc"
+alias vizim="vi $ZSH_CONFIG"
+alias nvzim="nv $ZSH_CONFIG"
+alias hxzim="hx $ZSH_CONFIG"
+alias catzim="cat $ZSH_CONFIG"
+alias batzim="bat $ZSH_CONFIG"
 
-alias vibash="vi ~/.bashrc"
-alias nvbash="nv ~/.bashrc"
-alias hxbash="hx ~/.bashrc"
-alias catbash="cat ~/.bashrc"
-alias batbash="bat ~/.bashrc"
+BASH_CONFIG="~/.bashrc"
+alias vibash="vi $BASH_CONFIG"
+alias nvbash="nv $BASH_CONFIG"
+alias hxbash="hx $BASH_CONFIG"
+alias catbash="cat $BASH_CONFIG"
+alias batbash="bat $BASH_CONFIG"
 
-alias vifish="vi ~/.config/fish/config.fish"
-alias nvfish="nv ~/.config/fish/config.fish"
-alias hxfish="hx ~/.config/fish/config.fish"
-alias catfish="cat ~/.config/fish/config.fish"
-alias batfish="bat ~/.config/fish/config.fish"
+FISH_CONFIG="~/.config/fish/config.fish"
+alias vifish="vi $FISH_CONFIG"
+alias nvfish="nv $FISH_CONFIG"
+alias hxfish="hx $FISH_CONFIG"
+alias catfish="cat $FISH_CONFIG"
+alias batfish="bat $FISH_CONFIG"
+
+
+# niri aliases
+if command -v niri >/dev/null 2>&1; then
+    NIRI_CONFIG="~/.config/niri/config.kdl"
+    alias vizsh="vi $ZSH_CONFIG"
+    alias nvzsh="nv $ZSH_CONFIG"
+    alias hxzsh="hx $ZSH_CONFIG"
+    alias catzsh="cat $ZSH_CONFIG"
+    alias batzsh="bat $ZSH_CONFIG"
+fi
+
+
+# Homebrew mirror
+export HOMEBREW_BREW_GIT_REMOTE="https://mirrors.ustc.edu.cn/brew.git"
+export HOMEBREW_CORE_GIT_REMOTE="https://mirrors.ustc.edu.cn/homebrew-core.git"
+export HOMEBREW_BOTTLE_DOMAIN="https://mirrors.ustc.edu.cn/homebrew-bottles"
+export HOMEBREW_API_DOMAIN="https://mirrors.ustc.edu.cn/homebrew-bottles/api"
 
 
 # config rust

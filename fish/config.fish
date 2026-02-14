@@ -29,23 +29,36 @@ if status is-interactive
     alias cd="z"
     alias rsyncp="rsync -alvhP"
 
-    alias vifish="vi ~/.config/fish/config.fish"
-    alias nvfish="nv ~/.config/fish/config.fish"
-    alias hxfish="hx ~/.config/fish/config.fish"
-    alias catfish="cat ~/.config/fish/config.fish"
-    alias batfish="bat ~/.config/fish/config.fish"
+    set FISH_CONFIG "~/.config/fish/config.fish"
+    alias vifish="vi $FISH_CONFIG"
+    alias nvfish="nv $FISH_CONFIG"
+    alias hxfish="hx $FISH_CONFIG"
+    alias catfish="cat $FISH_CONFIG"
+    alias batfish="bat $FISH_CONFIG"
 
-    alias vibash="vi ~/.bashrc"
-    alias nvbash="nv ~/.bashrc"
-    alias hxbash="hx ~/.bashrc"
-    alias catbash="cat ~/.bashrc"
-    alias batbash="bat ~/.bashrc"
+    set BASH_CONFIG "~/.bashrc"
+    alias vibash="vi $BASH_CONFIG"
+    alias nvbash="nv $BASH_CONFIG"
+    alias hxbash="hx $BASH_CONFIG"
+    alias catbash="cat $BASH_CONFIG"
+    alias batbash="bat $BASH_CONFIG"
 
-    alias vizsh="vi ~/.zshrc"
-    alias nvzsh="nv ~/.zshrc"
-    alias hxzsh="hx ~/.zshrc"
-    alias catzsh="cat ~/.zshrc"
-    alias batzsh="bat ~/.zshrc"
+    set ZSH_CONFIG "~/.zshrc"
+    alias vizsh="vi $ZSH_CONFIG"
+    alias nvzsh="nv $ZSH_CONFIG"
+    alias hxzsh="hx $ZSH_CONFIG"
+    alias catzsh="cat $ZSH_CONFIG"
+    alias batzsh="bat $ZSH_CONFIG"
+
+    # niri alias
+    if command -q niri
+        set NIRI_CONFIG "~/.config/niri/config.kdl"
+        alias vizsh="vi $ZSH_CONFIG"
+        alias nvzsh="nv $ZSH_CONFIG"
+        alias hxzsh="hx $ZSH_CONFIG"
+        alias catzsh="cat $ZSH_CONFIG"
+        alias batzsh="bat $ZSH_CONFIG"
+    end
 
     # homebrew mirror
     set -x HOMEBREW_BREW_GIT_REMOTE "https://mirrors.ustc.edu.cn/brew.git"
