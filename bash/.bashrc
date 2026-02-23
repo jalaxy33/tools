@@ -97,6 +97,9 @@ if command -v niri >/dev/null 2>&1; then
   alias hxniri="hx $NIRI_CONFIG"
   alias catniri="cat $NIRI_CONFIG"
   alias batniri="bat $NIRI_CONFIG"
+
+  NIRI_DIR="~/.config/niri/"
+  alias cdniri="cd $NIRI_DIR"
 fi
 
 #-- alias functions
