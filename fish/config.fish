@@ -148,3 +148,14 @@ function clear_claude
     rm -rf ~/.claude/{cache,debug,projects,shell-snapshots,statsig,telemetry,todos,file-history,plans,history.jsonl,session-env}
     echo "claude history cleared."
 end
+
+# UU加速器
+function start_uu
+    sudo systemctl start uuplugin
+    echo UU加速器已开启
+end
+
+function stop_uu
+    sudo systemctl stop uuplugin
+    echo UU加速器已关闭
+end

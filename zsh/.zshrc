@@ -161,6 +161,16 @@ function clear_claude() {
     echo "claude history cleared."
 }
 
+# UU加速器
+function start_uu() {
+  sudo systemctl start uuplugin
+  echo "UU加速器已开启"
+}
+
+function stop_uu() {
+  sudo systemctl stop uuplugin
+  echo "UU加速器已关闭"
+}
 
 # -- Zsh-specific
 # Set lazygit keybinding (crtl+g)
