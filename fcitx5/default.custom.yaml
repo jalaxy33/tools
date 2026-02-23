@@ -1,9 +1,10 @@
 # ~/.local/share/fcitx5/rime/default.custom.yaml 
 
 patch:
-  # 这里的 rime_ice_suggestion 为雾凇方案的默认预设
-  __include: rime_ice_suggestion:/
-
-  # 以下根据自己所需自行定义
-  __patch:
-    menu/page_size: 10   #候选词个数
+  schema_list:
+    - schema: rime_ice
+    - schema: luna_pinyin_simp
+    - schema: double_pinyin
+    - schema: wubi86
+    - schema: bopomofo
+  "menu/page_size": 6

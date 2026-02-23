@@ -1,54 +1,62 @@
 # ~/.zshrc
 #
 # Necessary: 
-#  - zsh, zimfw, vim
+#  - zsh, zimfw, vim(or gvim)
 #  - zoxide, fzf, eza, yazi, lazygit
 #
 # Optional but useful:
-#  - bat, helix, rsync, neovim
+#  - bat, helix, rsync, neovim, fastfetch, lazygit
 
 
 # Reference:
 #   - https://www.bilibili.com/video/BV1fdTfzeE8X/
 
 
-# -- zimfw 
+#-- init zimfw 
+if [[ -f "/usr/share/zimfw/zimfw.zsh" ]]; then
+    ZIM_HOME=${ZDOTDIR:-${HOME}}/.zim
+    # Install missing modules and update ${ZIM_HOME}/init.zsh if missing or outdated.
+    if [[ ! ${ZIM_HOME}/init.zsh -nt ${ZIM_CONFIG_FILE:-${ZDOTDIR:-${HOME}}/.zimrc} ]]; then
+        source /usr/share/zimfw/zimfw.zsh init
+    fi
 
-ZIM_HOME=${ZDOTDIR:-${HOME}}/.zim
-# Install missing modules and update ${ZIM_HOME}/init.zsh if missing or outdated.
-if [[ ! ${ZIM_HOME}/init.zsh -nt ${ZIM_CONFIG_FILE:-${ZDOTDIR:-${HOME}}/.zimrc} ]]; then
-  source /usr/share/zimfw/zimfw.zsh init
+    # Initialize modules.
+    source ${ZIM_HOME}/init.zsh
+
+    # Modules configuration
+    ZSH_AUTOSUGGEST_MANUAL_REBIND=1
 fi
 
-# Initialize modules.
-source ${ZIM_HOME}/init.zsh
-
-# Modules configuration
-ZSH_AUTOSUGGEST_MANUAL_REBIND=1
-
-
-# -- Homebrew init
-
-# try to activate homebrew
+#-- try to activate homebrew
 if [[ -x "/home/linuxbrew/.linuxbrew/bin/brew" ]]; then
     eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 fi
 
-
-# -- General Configs
-
-# startup apps
-eval "$(zoxide init zsh)"
+#-- init apps
+eval "$(zoxide init zsh --cmd cd)"
 source <(fzf --zsh)
 
-# aliases
+# config yazi
+function y() {
+    local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
+    command yazi "$@" --cwd-file="$tmp"
+    IFS= read -r -d '' cwd < "$tmp"
+    [ "$cwd" != "$PWD" ] && [ -d "$cwd" ] && builtin cd -- "$cwd"
+    rm -f -- "$tmp"
+}
+
+#-- aliases
+# editor aliases
 alias vi="vim"
 alias nv="nvim"
 alias hx="helix"
-alias ls="eza --icons --git -a"
-alias cd="z"
-alias rsyncp="rsync -alvhP"
 
+# command abbrs
+alias fa="fastfetch"
+alias lg="lazygit"
+alias reboot="systemctl reboot"
+
+# configs shortcuts
 ZSH_CONFIG="~/.zshrc"
 alias vizsh="vi $ZSH_CONFIG"
 alias nvzsh="nv $ZSH_CONFIG"
@@ -77,8 +85,7 @@ alias hxfish="hx $FISH_CONFIG"
 alias catfish="cat $FISH_CONFIG"
 alias batfish="bat $FISH_CONFIG"
 
-
-# niri aliases
+# niri
 if command -v niri >/dev/null 2>&1; then
     NIRI_CONFIG="~/.config/niri/config.kdl"
     alias viniri="vi $NIRI_CONFIG"
@@ -86,46 +93,44 @@ if command -v niri >/dev/null 2>&1; then
     alias hxniri="hx $NIRI_CONFIG"
     alias catniri="cat $NIRI_CONFIG"
     alias batniri="bat $NIRI_CONFIG"
+
+    NIRI_DIR="~/.config/niri/"
+    alias cdniri="cd $NIRI_DIR"
 fi
 
+#-- alias functions
+function ls() {
+  eza --icons --git -a $@
+}
 
-# Homebrew mirror
+function rsyncp() {
+  rsync -alvhP $@
+}
+
+#-- lang & mirrors
+# homebrew
 export HOMEBREW_BREW_GIT_REMOTE="https://mirrors.ustc.edu.cn/brew.git"
 export HOMEBREW_CORE_GIT_REMOTE="https://mirrors.ustc.edu.cn/homebrew-core.git"
 export HOMEBREW_BOTTLE_DOMAIN="https://mirrors.ustc.edu.cn/homebrew-bottles"
 export HOMEBREW_API_DOMAIN="https://mirrors.ustc.edu.cn/homebrew-bottles/api"
 
-
-# config rust
+# rust
 export RUSTUP_DIST_SERVER="https://rsproxy.cn"
 export RUSTUP_UPDATE_ROOT="https://rsproxy.cn/rustup"
 if [[ -f "$HOME/.cargo/env" ]]; then
     source "$HOME/.cargo/env"
 fi
 
-
-# config nodejs
+# nodejs
 export FNM_NODE_DIST_MIRROR="https://npmmirror.com/mirrors/node/"
 if command -v fnm >/dev/null 2>&1; then
     eval "$(fnm env --use-on-cd --shell zsh)"
 fi
 
-# config go
+# go
 export GOPROXY="https://mirrors.tencent.com/go/"
 
-
 # -- Functions
-
-# config yazi
-function y() {
-    local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
-    command yazi "$@" --cwd-file="$tmp"
-    IFS= read -r -d '' cwd < "$tmp"
-    [ "$cwd" != "$PWD" ] && [ -d "$cwd" ] && builtin cd -- "$cwd"
-    rm -f -- "$tmp"
-}
-
-
 # proxy functions
 function set_proxy() {
     proxy_url="127.0.0.1:7890"
@@ -150,17 +155,14 @@ function unset_proxy() {
     git config --global --unset https.proxy
 }
 
-
-# other functions
+# clean claude-code history
 function clear_claude() {
     rm -rf ~/.claude/{cache,debug,projects,shell-snapshots,statsig,telemetry,todos,file-history,plans,history.jsonl,session-env}
     echo "claude history cleared."
 }
 
 
-
 # -- Zsh-specific
-
 # Set lazygit keybinding (crtl+g)
 function lazygit_widget() {
     lazygit
@@ -170,7 +172,6 @@ function lazygit_widget() {
 zle -N lazygit_widget
 bindkey '^g' lazygit_widget
 
-
 # Set yazi keybinding (crtl+y)
 function yazi_widget() {
     y
@@ -179,7 +180,6 @@ function yazi_widget() {
 
 zle -N yazi_widget
 bindkey '^y' yazi_widget
-
 
 # Set nvim keybinding (alt+n)
 function nvim_widget() {

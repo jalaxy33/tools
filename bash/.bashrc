@@ -1,20 +1,17 @@
 # ~/.bashrc
 #
 # Necessary:
-#  - bash, vim
+#  - bash, starship, vim(or gvim)
 #  - zoxide, fzf, eza, yazi
 #
 # Optional but useful:
-#  - bat, helix, rsync, neovim
-
+#  - bat, helix, rsync, neovim, fastfetch, lazygit
 
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
-
 # prompt format
 PS1='[\u@\h \W]\$ '
-
 
 # history related settings
 ## ignore duplicate lines and space in the history.
@@ -27,7 +24,7 @@ shopt -s histappend
 HISTSIZE=50
 HISTFILESIZE=100
 
-
+# -- system commands
 # color support
 alias ls='ls --color=auto'
 alias grep='grep --color=auto'
@@ -36,33 +33,42 @@ alias egrep='egrep --color=auto'
 alias dir='dir --color=auto'
 alias vdir='vdir --color=auto'
 
-
 # ls aliases
 alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'
 
-
-# try to activate homebrew
+#-- try to activate homebrew
 if [[ -x "/home/linuxbrew/.linuxbrew/bin/brew" ]]; then
-    eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+  eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 fi
 
-
-# startup apps
+#-- init apps
 eval "$(starship init bash)"
-eval "$(zoxide init bash)"
+eval "$(zoxide init bash --cmd cd)"
 eval "$(fzf --bash)"
 
+# config yazi
+function y() {
+  local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
+  command yazi "$@" --cwd-file="$tmp"
+  IFS= read -r -d '' cwd <"$tmp"
+  [ "$cwd" != "$PWD" ] && [ -d "$cwd" ] && builtin cd -- "$cwd"
+  rm -f -- "$tmp"
+}
 
-# more aliases
+#-- aliases
+# editor aliases
 alias vi="vim"
 alias nv="nvim"
 alias hx="helix"
-alias ls="eza --icons --git -a"
-alias cd="z"
-alias rsyncp="rsync -alvhP"
 
+# command abbrs
+alias fa="fastfetch"
+alias lg="lazygit"
+alias reboot="systemctl reboot"
+
+# configs shortcuts
 BASH_CONFIG="~/.bashrc"
 alias vibash="vi $BASH_CONFIG"
 alias nvbash="nv $BASH_CONFIG"
@@ -84,82 +90,74 @@ alias hxfish="hx $FISH_CONFIG"
 alias catfish="cat $FISH_CONFIG"
 alias batfish="bat $FISH_CONFIG"
 
-
-# niri aliases
 if command -v niri >/dev/null 2>&1; then
-    NIRI_CONFIG="~/.config/niri/config.kdl"
-    alias viniri="vi $NIRI_CONFIG"
-    alias nvniri="nv $NIRI_CONFIG"
-    alias hxniri="hx $NIRI_CONFIG"
-    alias catniri="cat $NIRI_CONFIG"
-    alias batniri="bat $NIRI_CONFIG"
+  NIRI_CONFIG="~/.config/niri/config.kdl"
+  alias viniri="vi $NIRI_CONFIG"
+  alias nvniri="nv $NIRI_CONFIG"
+  alias hxniri="hx $NIRI_CONFIG"
+  alias catniri="cat $NIRI_CONFIG"
+  alias batniri="bat $NIRI_CONFIG"
 fi
 
+#-- alias functions
+function ls() {
+  eza --icons --git -a $@
+}
 
-# Homebrew mirror
+function rsyncp() {
+  rsync -alvhP $@
+}
+
+#-- lang & mirrors
+# homebrew
 export HOMEBREW_BREW_GIT_REMOTE="https://mirrors.ustc.edu.cn/brew.git"
 export HOMEBREW_CORE_GIT_REMOTE="https://mirrors.ustc.edu.cn/homebrew-core.git"
 export HOMEBREW_BOTTLE_DOMAIN="https://mirrors.ustc.edu.cn/homebrew-bottles"
 export HOMEBREW_API_DOMAIN="https://mirrors.ustc.edu.cn/homebrew-bottles/api"
 
-
-# config rust
+# rust
 export RUSTUP_DIST_SERVER="https://rsproxy.cn"
 export RUSTUP_UPDATE_ROOT="https://rsproxy.cn/rustup"
 if [[ -f "$HOME/.cargo/env" ]]; then
-    source "$HOME/.cargo/env"
+  source "$HOME/.cargo/env"
 fi
 
-
-# config nodejs
+# nodejs
 export FNM_NODE_DIST_MIRROR="https://npmmirror.com/mirrors/node/"
 if command -v fnm >/dev/null 2>&1; then
-    eval "$(fnm env --use-on-cd --shell bash)"
+  eval "$(fnm env --use-on-cd --shell bash)"
 fi
 
-# config go
+# go
 export GOPROXY="https://mirrors.tencent.com/go/"
 
-
-# config yazi
-function y() {
-    local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
-    command yazi "$@" --cwd-file="$tmp"
-    IFS= read -r -d '' cwd < "$tmp"
-    [ "$cwd" != "$PWD" ] && [ -d "$cwd" ] && builtin cd -- "$cwd"
-    rm -f -- "$tmp"
-}
-
-
+#-- functions
 # proxy functions
 function set_proxy() {
-    proxy_url="127.0.0.1:7890"
-    http_proxy="http://$proxy_url"
+  proxy_url="127.0.0.1:7890"
+  http_proxy="http://$proxy_url"
 
-    echo "proxy_url: $proxy_url"
+  echo "proxy_url: $proxy_url"
 
-    export ALL_PROXY=$http_proxy
-    export HTTP_PROXY=$http_proxy
-    export HTTPS_PROXY=$http_proxy
+  export ALL_PROXY=$http_proxy
+  export HTTP_PROXY=$http_proxy
+  export HTTPS_PROXY=$http_proxy
 
-    git config --global http.proxy $http_proxy
-    git config --global https.proxy $http_proxy
+  git config --global http.proxy $http_proxy
+  git config --global https.proxy $http_proxy
 }
 
 function unset_proxy() {
-    unset ALL_PROXY
-    unset HTTP_PROXY
-    unset HTTPS_PROXY
+  unset ALL_PROXY
+  unset HTTP_PROXY
+  unset HTTPS_PROXY
 
-    git config --global --unset http.proxy
-    git config --global --unset https.proxy
+  git config --global --unset http.proxy
+  git config --global --unset https.proxy
 }
 
-
-# other functions
+# clean claude-code history
 function clear_claude() {
-    rm -rf ~/.claude/{cache,debug,projects,shell-snapshots,statsig,telemetry,todos,file-history,plans,history.jsonl,session-env}
-    echo "claude history cleared."
+  rm -rf ~/.claude/{cache,debug,projects,shell-snapshots,statsig,telemetry,todos,file-history,plans,history.jsonl,session-env}
+  echo "claude history cleared."
 }
-
-

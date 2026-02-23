@@ -1,24 +1,17 @@
 # `<PROJECT_ROOT>/.cargo/config.toml` or `~/.cargo/config` or `~/.cargo.config.toml`
 
-
-# crates.io proxy
+#-- mirrors
 [source.crates-io]
-replace-with = 'rsproxy-sparse'
+replace-with = 'ustc'
 
-[source.rsproxy]
-registry = "https://rsproxy.cn/crates.io-index"
+[source.ustc]
+registry = "sparse+https://mirrors.ustc.edu.cn/crates.io-index/"
 
-[source.rsproxy-sparse]
-registry = "sparse+https://rsproxy.cn/index/"
+[registries.ustc]
+index = "sparse+https://mirrors.ustc.edu.cn/crates.io-index/"
 
-[registries.rsproxy]
-index = "https://rsproxy.cn/crates.io-index"
-
-[net]
-git-fetch-with-cli = true
-
-
-# faster linker on linux
+#-- faster linker on linux
+# install `clang` & `mold`
 ## reference: https://bevy.org/learn/quick-start/getting-started/setup/#enable-fast-compiles-optional
 [target.'cfg(target_os = "linux")']
 linker = "clang"
