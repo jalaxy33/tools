@@ -124,9 +124,6 @@ fi
 
 # nodejs
 export FNM_NODE_DIST_MIRROR="https://npmmirror.com/mirrors/node/"
-if command -v fnm >/dev/null 2>&1; then
-    eval "$(fnm env --use-on-cd --shell zsh)"
-fi
 
 # go
 export GOPROXY="https://mirrors.tencent.com/go/"
