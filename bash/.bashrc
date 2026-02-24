@@ -67,6 +67,7 @@ alias hx="helix"
 alias fa="fastfetch"
 alias lg="lazygit"
 alias reboot="systemctl reboot"
+alias grub='sudo grub-mkconfig -o /boot/grub/grub.cfg'
 
 # configs shortcuts
 BASH_CONFIG="~/.bashrc"

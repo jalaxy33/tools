@@ -51,6 +51,7 @@ alias hx='helix'
 abbr fa fastfetch
 abbr lg lazygit
 abbr reboot 'systemctl reboot'
+abbr grub 'sudo grub-mkconfig -o /boot/grub/grub.cfg'
 
 # configs shortcuts
 set FISH_CONFIG "~/.config/fish/config.fish"
