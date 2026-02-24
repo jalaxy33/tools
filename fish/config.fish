@@ -112,6 +112,9 @@ end
 
 # nodejs
 set -x FNM_NODE_DIST_MIRROR "https://npmmirror.com/mirrors/node/"
+if command -q fnm
+    fnm env --use-on-cd --shell fish | source
+end
 
 # go
 set -x GOPROXY "https://mirrors.tencent.com/go/"
