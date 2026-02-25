@@ -219,5 +219,42 @@
     ```
 
 
+### 只克隆部分文件
+
+利用 sparse-checkout 的方式
+
+1. 首先克隆仓库，但不下载内容：
+    ```sh
+    git clone --filter=blob:none --no-checkout <仓库URL>
+    cd <仓库目录>
+    ```
+    - `--filter=blob:none`：告诉 Git 不要下载任何文件内容（blob 对象），只下载 commit 和 tree 对象。
+    - `--no-checkout`：克隆后不自动检出任何文件，避免触发按需下载。
+
+2. 启用 sparse-checkout：
+    ```sh
+    # 启用稀疏检出，使用锥形模式（推荐）
+    git sparse-checkout init --cone
+    ```
+    锥形模式（cone mode）会优化性能，只匹配目录层级，而不是完整路径模式。
+
+3. 设置所需路径：
+
+    可以用 `set` 命令快速设置，也可以手动编辑 `.git/info/sparse-checkout` 文件。默认只checkout项目根目录下的文件：
+    ```sh
+    git sparse-checkout set <子目录1> <子目录2>  # 设置要检出的目录/文件
+    ```
+
+4. 检出当前分支（通常是 main/master）
+    ```sh
+    git checkout main   # 或你需要的分支
+    ```
+
+5. 后续同步更新
+
+    ```sh
+    git pull origin main
+    ```
+
 
 

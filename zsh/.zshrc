@@ -158,7 +158,7 @@ function unset_proxy() {
 
 # clean claude-code history
 function clear_claude() {
-    rm -rf ~/.claude/{cache,debug,projects,shell-snapshots,statsig,telemetry,todos,file-history,plans,history.jsonl,session-env}
+    rm -rf ~/.claude/{backups,cache,debug,projects,shell-snapshots,statsig,telemetry,todos,file-history,plans,history.jsonl,session-env}
     echo "claude history cleared."
 }
 
