@@ -7,8 +7,8 @@
 #     git clone https://github.com/SHORiN-KiWATA/shorin-arch-setup.git ~/.local/share/shorin-arch-setup
 # 2. 复制 `sync-modify.sh` 到 ~/.config/niri/scripts/sync-modify.sh
 #     脚本链接：https://github.com/jalaxy33/tools/blob/main/scripts/sync-modify/sync-modify.sh
-# 3. 赋予执行权限：
-#     chmod +x ~/.config/niri/scripts/sync-modify.sh
+# 3. 赋予此脚本执行权限：
+#     chmod +x ~/.config/niri/scripts/shorin-sync.sh
 # 4. 将此脚本链接到 ~/.local/bin/shorin-sync
 #     ln -s ~/.config/niri/scripts/shorin-sync.sh ~/.local/bin/shorin-sync
 #
