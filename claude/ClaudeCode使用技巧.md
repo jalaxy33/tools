@@ -22,7 +22,7 @@
     删除 `~/.claude/` 目录下的以下文件和文件夹：
 
     ```sh
-    rm -rf ~/.claude/{cache,debug,projects,shell-snapshots,statsig,telemetry,todos,file-history,plans,history.jsonl,session-env}
+    rm -rf ~/.claude/{backups,cache,debug,projects,shell-snapshots,statsig,telemetry,todos,file-history,plans,history.jsonl,session-env}
     ```
 
 ## 安装插件
