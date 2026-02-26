@@ -53,7 +53,7 @@ vim ~/.claude.json
 
 目前大部分的模型都提供了 Anthropic API 接入方式，请查询对应的 API 文档。
 
-1. 首先确保清除以下 Anthropic 相关的环境变量，以免影响其他 API 的正常使用：
+首先确保清除以下 Anthropic 相关的环境变量，以免影响其他 API 的正常使用：
 
 - `ANTHROPIC_AUTH_TOKEN`
 - `ANTHROPIC_BASE_URL`
