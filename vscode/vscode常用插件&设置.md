@@ -22,6 +22,7 @@
 - 快速搜索：`FindItFaster`（需要提前安装软件 `fzf`, `rg`, `bat`）
 - 远程连接：`Remote Development` 或 `Remote - SSH`
 - 自动拉取 github wiki：`Git WiKi Sync`
+- 还原URL中的中文：`URL Encode`（使用方法：选中文字 > Ctrl+Shift+P > 搜索 "URL-Decode"）
 - AI 助手：`Github Copilot` 或 `Lingma`
   - 需要一点额外配置的： `Claude Code for VS Code`（配置方法请看 [ClaudeCode 配置指南](../claude/ClaudeCode配置指南.md)）
 
