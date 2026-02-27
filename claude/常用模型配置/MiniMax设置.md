@@ -76,7 +76,7 @@
 
 - 可选：配置MCP服务器
 
-    **前提条件**：1. 订阅 [coding plan](https://platform.minimaxi.com/subscribe/coding-plan)；2. 安装 [`uv`](https://docs.astral.sh/uv/)。
+    **前提条件**：1. 订阅 [coding plan](https://platform.minimaxi.com/subscribe/coding-plan)；2. 安装 [`uv`](https://docs.astral.sh/uv/)。3. 可能需要网络环境。
 
     修改 `~/.claude.json` 的 `mcpServers` 字段：
     ```sh
