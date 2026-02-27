@@ -1,5 +1,8 @@
+# MiniMax 设置
 
 模型名称：`MiniMax M2.1`
+
+接入文档：https://platform.minimaxi.com/docs/coding-plan/claude-code
 
 **注：请将 `"ANTHROPIC_AUTH_TOKEN"` 字段更换为自己的 API key**。
 

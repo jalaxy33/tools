@@ -1,9 +1,13 @@
+# Deepseek 设置
 
 模型名称：`Deepseek V3.2`
+
+接入文档：https://api-docs.deepseek.com/zh-cn/guides/anthropic_api
 
 **注：请将 `"ANTHROPIC_AUTH_TOKEN"` 字段更换为自己的 API key**。
 
 - Claude Code 环境变量 `~/.claude/settings.json`：
+
   ```json
   {
     "env": {
@@ -24,10 +28,10 @@
   - 如果装了命令行工具，**保持默认就行**，也可以手动指定：
     ```json
     {
-      "claude-code.selectedModel": "deepseek-chat",
+      "claude-code.selectedModel": "deepseek-chat"
     }
     ```
-  - 如果没装命令行工具： 
+  - 如果没装命令行工具：
     ```json
     {
       "claudeCode.environmentVariables": [
@@ -67,6 +71,6 @@
           "name": "ANTHROPIC_DEFAULT_HAIKU_MODEL",
           "value": "deepseek-chat"
         }
-      ],
+      ]
     }
-    ``` 
+    ```

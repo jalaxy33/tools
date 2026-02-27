@@ -1,9 +1,13 @@
+# Kimi 设置
 
 模型名称：`kimi-k2.5`
+
+接入文档：https://platform.moonshot.cn/docs/guide/agent-support
 
 **注：请将 `"ANTHROPIC_AUTH_TOKEN"` 字段更换为自己的 API key**。
 
 - Claude Code 环境变量 `~/.claude/settings.json`：
+
   ```json
   {
     "env": {
@@ -24,10 +28,10 @@
   - 如果装了命令行工具，**保持默认就行**，也可以手动指定：
     ```json
     {
-      "claude-code.selectedModel": "kimi-k2.5",
+      "claude-code.selectedModel": "kimi-k2.5"
     }
     ```
-  - 如果没装命令行工具： 
+  - 如果没装命令行工具：
     ```json
     {
       "claudeCode.environmentVariables": [
@@ -67,7 +71,6 @@
           "name": "ANTHROPIC_DEFAULT_HAIKU_MODEL",
           "value": "kimi-k2.5"
         }
-      ],
+      ]
     }
-    ``` 
-
+    ```
