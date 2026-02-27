@@ -10,9 +10,10 @@ Win11 用户需要修改以下设置：
 
 ## 安装依赖
 
-- 安装 Watt Toolkit（网络环境）：[下载链接](https://steampp.net/)
+- 安装网络加速工具
+  - 如 `Watt Toolkit`：[下载链接](https://steampp.net/)
 
-  安装后打开软件，选择左边栏第二个 `网络加速` > 勾选全部平台 > 右上角点击 `一键加速`。
+    安装后打开软件，选择左边栏第二个 `网络加速` > 勾选全部平台 > 右上角点击 `一键加速`。
 
 - 安装 Git：[官网](https://git-scm.com/install/windows)
   ```sh
