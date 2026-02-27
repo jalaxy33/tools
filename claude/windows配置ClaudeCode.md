@@ -24,11 +24,10 @@ Win11 用户需要修改以下设置：
       winget install Schniz.fnm
       ```
   2.  检查 powershell 的配置文件是否存在，如果没有就创建一下。配置文件有两个位置：
-      - `~/Documents/PowerShell/profile.ps1`
-      - `~/Documents/WindowsPowerShell/profile.ps1`
+      - `C:\Users\你的用户名\Documents\PowerShell\profile.ps1`
+      - `C:\Users\你的用户名\Documents\WindowsPowerShell\profile.ps1`
 
-      `~/Documents/` 就是 `C:\Users\你的用户名\Documents\` 这个文件夹，可能也叫 `文档`。
-
+      中间没有的目录手动创建一下。
 
   3.  在配置文件里写入：
 
@@ -48,6 +47,28 @@ Win11 用户需要修改以下设置：
       ```sh
       npm
       ```
+
+- 安装uv（python环境）：
+  1. 安装
+
+     ```sh
+     winget install astral-sh.uv
+     ```
+
+  2. 重启终端，检查是否安装成功
+
+     ```sh
+     uv
+     ```
+
+  3. 添加配置文件，创建 `%APPDATA%\uv\uv.toml` （即 `C:\Users\你的用户名\AppData\Roaming\uv\uv.toml`）文件，中间没有的目录手动创建一下。
+  4. 添加以下内容：
+
+     ```toml
+     [[index]]
+     url = "https://mirrors.ustc.edu.cn/pypi/simple"
+     default = true
+     ```
 
 - 下载安装 cc-switch：[windows安装文档](https://github.com/farion1231/cc-switch/blob/main/README_ZH.md#windows-用户)
 
