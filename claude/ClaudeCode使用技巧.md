@@ -4,6 +4,41 @@
   - [官方文档](https://code.claude.com/docs/en/overview)
   - [smithery](https://smithery.ai/)：MCP和skills的资源库。
 
+## 常用快捷键和命令
+
+快捷键：
+
+- 切换计划模式（plan mode）：`Shift+Tab`
+- 在文本编辑器编辑对话：`Crtl+g`
+- 展开折叠的对话内容：`Crtl+o`
+
+功能命令：
+
+- 按键教程：`?`
+- 推出claude-code：`/exit` 或 `exit`
+- 运行命令：`!` + 命令
+- 引用文件或目录作为上下文：`@` + 文件或目录路径
+- 切换计划模式或查看计划：`/plan`
+- 激活沙箱模式：`/sandbox`
+- 在工作空间中添加新的目录：`/add-dir`
+- 切换颜色主题：`/theme`
+
+功能扩展相关命令：
+
+- 管理插件：`/plugin`
+- 管理MCP服务器：`/MCP`
+- 管理skills：`/skills`
+- 创建和管理agent：`/agent`
+- 创建和管理hooks：`/hooks`
+
+对话记录相关命令：
+
+- 恢复历史对话：`/resume`
+- 清除当前历史对话记录：`/clear`
+- 对话历史上下文压缩：`/compact`（用来压缩过长的对话记录以节省Token）
+- 退回到之前的某个对话状态：`/rewind`
+- 从当前对话状态创建一个新的分支：`/fork`
+
 ## 删除历史对话记录
 
 - 删除某个历史对话
@@ -21,10 +56,13 @@
 
   删除 `~/.claude/` 目录下的以下文件和文件夹：
   - bash/zsh/fish:
+
     ```sh
     rm -rf ~/.claude/{backups,cache,debug,projects,shell-snapshots,statsig,telemetry,todos,file-history,plans,history.jsonl,session-env}
     ```
+
   - powershell:
+
     ```ps1
     rm "$HOME\.claude\backups","$HOME\.claude\cache","$HOME\.claude\debug",`
         "$HOME\.claude\projects","$HOME\.claude\shell-snapshots",`
