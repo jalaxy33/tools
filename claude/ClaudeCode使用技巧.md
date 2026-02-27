@@ -1,8 +1,6 @@
 # Claude Code 使用技巧
 
-
 - 有用的参考资料:
-
   - [官方文档](https://code.claude.com/docs/en/overview)
   - [smithery](https://smithery.ai/)：MCP和skills的资源库。
 
@@ -10,42 +8,51 @@
 
 - 删除某个历史对话
 
-    ```sh
-    claude
-    ```
+  ```sh
+  claude
+  ```
 
-    ```sh
-    /resume  # 选择对话
-    /clear   # 清除历史记录
-    ```
+  ```sh
+  /resume  # 选择对话
+  /clear   # 清除历史记录
+  ```
 
 - 删除所有历史记录
 
-    删除 `~/.claude/` 目录下的以下文件和文件夹：
-
+  删除 `~/.claude/` 目录下的以下文件和文件夹：
+  - bash/zsh/fish:
     ```sh
     rm -rf ~/.claude/{backups,cache,debug,projects,shell-snapshots,statsig,telemetry,todos,file-history,plans,history.jsonl,session-env}
+    ```
+  - powershell:
+    ```ps1
+    rm "$HOME\.claude\backups","$HOME\.claude\cache","$HOME\.claude\debug",`
+        "$HOME\.claude\projects","$HOME\.claude\shell-snapshots",`
+        "$HOME\.claude\statsig","$HOME\.claude\telemetry","$HOME\.claude\todos",`
+        "$HOME\.claude\file-history","$HOME\.claude\plans",`
+        "$HOME\.claude\history.jsonl","$HOME\.claude\session-env" `
+        -r -fo -EA SilentlyContinue
     ```
 
 ## 安装插件
 
 1. 运行 claude
 
-    ```sh
-    claude
-    ```
+   ```sh
+   claude
+   ```
 
 2. （可选）添加官方插件商城
 
-    ```
-    /plugin
-    ```
+   ```
+   /plugin
+   ```
 
-    按右箭头选中 `Marketplaces` 标签，选择 「+ Add Marketplace」回车，输入仓库名称后回车：
+   按右箭头选中 `Marketplaces` 标签，选择 「+ Add Marketplace」回车，输入仓库名称后回车：
 
-    ```
-    anthropics/claude-plugins-official
-    ```
+   ```
+   anthropics/claude-plugins-official
+   ```
 
 3. 然后就可以用 `/plugin install <插件名>` 或者在 `/plugin` > `Discover` 下安装插件了。
 

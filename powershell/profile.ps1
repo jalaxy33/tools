@@ -130,6 +130,17 @@ function unset_proxy {
 }
 
 
+# -- claude
+function clear_claude() {
+    rm "$HOME\.claude\backups","$HOME\.claude\cache","$HOME\.claude\debug",`
+        "$HOME\.claude\projects","$HOME\.claude\shell-snapshots",`
+        "$HOME\.claude\statsig","$HOME\.claude\telemetry","$HOME\.claude\todos",`
+        "$HOME\.claude\file-history","$HOME\.claude\plans",`
+        "$HOME\.claude\history.jsonl","$HOME\.claude\session-env" `
+        -r -fo -EA SilentlyContinue
+}
+
+
 ## --- environment variables ---
 
 # Editor
