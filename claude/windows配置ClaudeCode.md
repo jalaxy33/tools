@@ -1,8 +1,8 @@
-# Windows 安装 claude-code
+# Windows 安装 Claude Code
 
 以下命令使用 `powershell` 运行。
 
-# 安装依赖
+## 安装依赖
 
 - 安装 Watt Toolkit（网络环境）：https://steampp.net/
 - 安装 Git：https://git-scm.com/install/windows
@@ -36,8 +36,10 @@
       ```sh
       npm
       ```
+- 安装 cc-switch：https://github.com/farion1231/cc-switch/blob/main/README_ZH.md#windows-用户
 
-# 安装 claude-code
+
+## 安装 claude-code
 
 - npm 安装
 
@@ -51,3 +53,5 @@
   ```
 
 之后的流程按[配置指南](./ClaudeCode配置指南.md)里的来。
+
+
