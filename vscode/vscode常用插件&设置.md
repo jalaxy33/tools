@@ -58,7 +58,6 @@
 - 编译工具：`CMake Tools` 或 `xmake`
 - CMake格式化：`CMake Language Support`
 
-
 ### 特定文件格式
 
 【必要】
@@ -79,7 +78,7 @@
 - powershell 脚本 (.ps1) 语法提示：`PowerShell`
 - nushell 角标 (.nu) 语法提示：`vscode-nushell-lang`
 - kdl配置文件语法高亮：`KDL`
-
+- 查看和编辑excalidraw文件：`Excalidraw`
 
 ### 主题外观
 
