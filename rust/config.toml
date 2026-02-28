@@ -1,4 +1,7 @@
-# `<PROJECT_ROOT>/.cargo/config.toml` or `~/.cargo/config` or `~/.cargo/config.toml`
+# ~/.cargo/config.toml 
+# or  ~/.cargo/config
+# or  <PROJECT_ROOT>/.cargo/config.toml
+
 
 #-- mirrors
 [source.crates-io]
