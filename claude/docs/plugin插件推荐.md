@@ -61,7 +61,7 @@ plugin 是将一系列 skills、MCP、hooks 打包在一起的工具集合。注
 /claude-hud:setup
 ```
 
-### context-mode（试用中）
+### context-mode
 
 仓库地址：[mksglu/context-mode](https://github.com/mksglu/context-mode)
 
@@ -79,37 +79,6 @@ context-mode 是一个 MCP 服务器，用于节省上下文。
 # 重新加载插件
 /reload-plugins
 ```
-
-### claude-mem（试用中）
-
-仓库地址：[thedotmack/claude-mem](https://github.com/thedotmack/claude-mem)
-
-claude-mem 是一个为 Claude Code 提供“长期记忆”的工具，让 Claude Code 能够跨会话、跨项目地记住你的偏好、代码逻辑和技术决策
-
-安装方法：
-
-- 通过 npm 安装：
-
-  ```sh
-  npx claude-mem install
-  ```
-
-  会自动为 claude、Codex 等 CLI 工具安装
-
-- 通过插件安装：
-
-  ```sh
-  # 添加市场
-  /plugin marketplace add thedotmack/claude-mem
-
-  # 安装插件
-  /plugin install claude-mem
-
-  # 重新加载插件
-  /reload-plugins
-  ```
-
-启用插件后，会启动一个后台服务，可以在 <http://localhost:37700> 实时查看内存流。对话记忆以 SQLite 格式持久保存在 `~/.claude-mem/` 目录下。
 
 ### rtk
 
