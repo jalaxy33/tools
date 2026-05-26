@@ -212,8 +212,8 @@ export HOMEBREW_BOTTLE_DOMAIN="https://mirrors.ustc.edu.cn/homebrew-bottles"
 export HOMEBREW_API_DOMAIN="https://mirrors.ustc.edu.cn/homebrew-bottles/api"
 
 # rust
-export RUSTUP_DIST_SERVER="https://rsproxy.cn"
-export RUSTUP_UPDATE_ROOT="https://rsproxy.cn/rustup"
+export RUSTUP_DIST_SERVER="https://mirrors.cernet.edu.cn/rustup"
+export RUSTUP_UPDATE_ROOT="https://mirrors.cernet.edu.cn/rustup/rustup"
 if [[ -f "$HOME/.cargo/env" ]]; then
     source "$HOME/.cargo/env"
 fi
@@ -325,11 +325,11 @@ function clear_pi() {
     set WORKDIR $PWD
     # clear ~/.pi cache
     cd ~/.pi
-    rm_except -y agent/
+    rm_except -y agent/ extensions/
     echo ""
     # clear ~/.pi/agent cache
     cd ~/.pi/agent/
-    rm_except -y auth.json settings.json
+    rm_except -y auth.json settings.json npm/
     # finish
     cd $WORKDIR
     echo "pi history cleared."

@@ -191,8 +191,8 @@ set -x HOMEBREW_BOTTLE_DOMAIN "https://mirrors.ustc.edu.cn/homebrew-bottles"
 set -x HOMEBREW_API_DOMAIN "https://mirrors.ustc.edu.cn/homebrew-bottles/api"
 
 # rust
-set -x RUSTUP_DIST_SERVER "https://rsproxy.cn"
-set -x RUSTUP_UPDATE_ROOT "https://rsproxy.cn/rustup"
+set -x RUSTUP_DIST_SERVER "https://mirrors.cernet.edu.cn/rustup"
+set -x RUSTUP_UPDATE_ROOT "https://mirrors.cernet.edu.cn/rustup/rustup"
 if test -f "$HOME/.cargo/env.fish"
     source "$HOME/.cargo/env.fish"
 end
@@ -307,11 +307,11 @@ function clear_pi
     set WORKDIR $PWD
     # clear ~/.pi cache
     cd ~/.pi
-    rm_except -y agent/
+    rm_except -y agent/ extensions/
     echo ""
     # clear ~/.pi/agent cache
     cd ~/.pi/agent/
-    rm_except -y auth.json settings.json
+    rm_except -y auth.json settings.json npm/
     # finish
     cd $WORKDIR
     echo "pi history cleared."
