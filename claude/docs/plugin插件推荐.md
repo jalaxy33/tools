@@ -109,4 +109,16 @@ claude-mem 是一个为 Claude Code 提供“长期记忆”的工具，让 Clau
   /reload-plugins
   ```
 
-启用插件后，会启动一个后台服务，可以在 http://localhost:37700 实时查看内存流。对话记忆以 SQLite 格式持久保存在 `~/.claude-mem/` 目录下。
+启用插件后，会启动一个后台服务，可以在 <http://localhost:37700> 实时查看内存流。对话记忆以 SQLite 格式持久保存在 `~/.claude-mem/` 目录下。
+
+### rtk
+
+仓库地址：[rtk-ai/rtk](https://github.com/rtk-ai/rtk)
+
+用于节省执行 bash 命令时的 token 消耗。
+
+在按照说明安装 rtk 之后，运行命令为 claude 配置 hook：
+
+```sh
+rtk init -g
+```

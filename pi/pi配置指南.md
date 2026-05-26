@@ -108,3 +108,4 @@ pi uninstall <extension-name>
 - [`pi-web-access`](https://www.npmjs.com/package/pi-web-access)：联网搜索
 - [`@juicesharp/rpiv-btw`](https://www.npmjs.com/package/@juicesharp/rpiv-btw): 提供 `/btw` 命令。可以在主要任务执行过程中问一些无关的问题，对话不进入上下文。
 - [`context-mode`](https://www.npmjs.com/package/context-mode): 节约上下文
+- [`rtk`](https://github.com/rtk-ai/rtk)：节省执行 bash 命令时的 token 消耗，安装后使用 `rtk init --agent pi` 配置。
