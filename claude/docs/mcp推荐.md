@@ -13,3 +13,7 @@ MCP 的缺点在于不管用不用得上，每次都会加载，上下文占用�
 - [deepwiki](https://docs.devin.ai/work-with-devin/deepwiki-mcp)：AI 解读 github 仓库，可用于大部分公开仓库。
 
   > 可以用 [deepwiki](https://www.deepwiki.sh/) cli+skill 替代
+
+- [codegraph](https://github.com/colbymchenry/codegraph)：为代码仓库预先建设一个知识图谱，agent可以无需每次都扫描文件，而是可以直接查图谱，从而节省 token。
+
+  > 注：需要先用 `npm` 或 `bun` 等安装好命令行工具才能使用，新项目需要在项目目录运行 `codegraph init -i` 来初始化图谱。
