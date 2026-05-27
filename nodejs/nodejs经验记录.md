@@ -56,14 +56,27 @@ npm
 
 ## 更换npm国内源
 
-更换为淘宝源：
+- 更换为淘宝源：
 
-```sh
-npm config set registry https://registry.npmmirror.com
-```
+    ```sh
+    npm config set registry https://registry.npmmirror.com
+    ```
 
-或者编辑 `~/.npmrc` 文件，添加以下内容：
+    或者编辑 `~/.npmrc` 文件，添加以下内容：
 
-```
-registry=https://registry.npmmirror.com/
-```
+    ```
+    registry=https://registry.npmmirror.com/
+    ```
+
+- 更换为腾讯云镜像源
+
+    ```sh
+    npm config set registry http://mirrors.cloud.tencent.com/npm/
+    ```
+
+    或者编辑 `~/.npmrc` 文件，添加以下内容：
+
+    ```
+    registry=http://mirrors.cloud.tencent.com/npm/
+    ```
+
