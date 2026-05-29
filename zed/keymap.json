@@ -64,4 +64,11 @@
       "ctrl-shift-c": "editor::Copy"
     }
   },
+  // Search selected in vim mode
+  {
+    "context": "Editor && vim_mode != insert",
+    "bindings": {
+      "/": "vim::SearchUnderCursorPrevious"
+    }
+  }
 ]
