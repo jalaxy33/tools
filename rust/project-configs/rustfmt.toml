@@ -3,6 +3,7 @@
 # imports
 imports_indent = "Visual"
 imports_granularity = "Module"
+group_imports = "StdExternalCrate"
 
 # comment
 wrap_comments = true
