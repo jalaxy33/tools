@@ -1,0 +1,55 @@
+#!/usr/bin/env bash
+# clear_claude - Clear Claude cache and reduce config to essential fields
+# Usage: clear_claude
+
+set -euo pipefail
+
+# Work directories
+WORKDIR="$PWD"
+CLAUDE_DIR="$HOME/.claude"
+CLAUDE_JSON="$HOME/.claude.json"
+
+# Validate Claude directory exists
+if [[ ! -d "$CLAUDE_DIR" ]]; then
+    echo "clear_claude: $CLAUDE_DIR not found" >&2
+    exit 1
+fi
+
+# Enter directory and clean
+cd "$CLAUDE_DIR" || {
+    echo "clear_claude: failed to cd into $CLAUDE_DIR" >&2
+    exit 1
+}
+
+# Delete all except explicit keep list (rm_expect is in PATH)
+rm_except -y settings.json config.json .credentials.json plugins skills || {
+    echo "clear_claude: rm_except failed" >&2
+    cd "$WORKDIR"
+    exit 1
+}
+
+# Return to original directory
+cd "$WORKDIR" || {
+    echo "clear_claude: warning - could not return to $WORKDIR" >&2
+}
+
+# Prune ~/.claude.json if it exists and jq is available
+if [[ -f "$CLAUDE_JSON" ]]; then
+    if command_exists jq; then
+        TMP_JSON="$(mktemp)"
+        if jq '{hasCompletedOnboarding, mcpServers}' "$CLAUDE_JSON" > "$TMP_JSON"; then
+            mv "$TMP_JSON" "$CLAUDE_JSON"
+            echo "clear_claude: pruned $CLAUDE_JSON (kept hasCompletedOnboarding, mcpServers)"
+        else
+            rm -f "$TMP_JSON"
+            echo "clear_claude: jq processing failed - $CLAUDE_JSON unchanged" >&2
+            exit 1
+        fi
+    else
+        echo "clear_claude: jq not installed - $CLAUDE_JSON unchanged" >&2
+    fi
+else
+    echo "clear_claude: $CLAUDE_JSON not found - nothing to prune" >&2
+fi
+
+echo "clear_claude: Claude history cleared successfully"

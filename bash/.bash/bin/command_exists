@@ -1,0 +1,6 @@
+#!/bin/bash
+# Usage: command_exists <command_name>
+# Returns: 0 if command exists, 1 if not, 2 if argument missing
+
+[ $# -eq 1 ] || { echo "Usage: command_exists <command_name>" >&2; exit 2; }
+command -v "$1" >/dev/null 2>&1

@@ -1,0 +1,48 @@
+#!/usr/bin/env bash
+# clear_pi - Clear Pi cache directories
+# Usage: clear_pi
+
+set -euo pipefail
+
+# Get the directory where this script is located
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+RM_EXCEPT="$SCRIPT_DIR/rm_except"
+
+# Check rm_except exists and is executable
+if [[ ! -x "$RM_EXCEPT" ]]; then
+    echo "clear_pi: error - rm_except not found or not executable at $RM_EXCEPT" >&2
+    exit 1
+fi
+
+# Save current working directory
+ORIG_DIR="$PWD"
+PI_HOME="$HOME/.pi"
+PI_AGENT_DIR="$PI_HOME/agent"
+
+# Step 1: Clean ~/.pi
+if [[ -d "$PI_HOME" ]]; then
+    cd "$PI_HOME" || { echo "clear_pi: failed to cd into $PI_HOME" >&2; exit 1; }
+    "$RM_EXCEPT" -y agent/ extensions/ || {
+        echo "clear_pi: rm_except failed in $PI_HOME" >&2
+        cd "$ORIG_DIR"
+        exit 1
+    }
+    cd "$ORIG_DIR"
+else
+    echo "clear_pi: $PI_HOME not found, skipping" >&2
+fi
+
+# Step 2: Clean ~/.pi/agent
+if [[ -d "$PI_AGENT_DIR" ]]; then
+    cd "$PI_AGENT_DIR" || { echo "clear_pi: failed to cd into $PI_AGENT_DIR" >&2; exit 1; }
+    "$RM_EXCEPT" -y auth.json settings.json npm/ || {
+        echo "clear_pi: rm_except failed in $PI_AGENT_DIR" >&2
+        cd "$ORIG_DIR"
+        exit 1
+    }
+    cd "$ORIG_DIR"
+else
+    echo "clear_pi: $PI_AGENT_DIR not found, skipping" >&2
+fi
+
+echo "clear_pi: Pi history cleared successfully"

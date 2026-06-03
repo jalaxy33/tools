@@ -1,0 +1,121 @@
+#!/usr/bin/env bash
+# rm_except - Delete all files/directories in current directory except specified items
+set -euo pipefail
+
+show_usage() {
+    cat <<EOF
+Usage: rm_except [-y|--yes] [--dry-run] [--] item1 [item2 ...]
+
+Delete all items in current directory EXCEPT those listed (top-level names only, no '/').
+
+Options:
+  -y, --yes       Force deletion without confirmation
+  --dry-run       Preview what would be deleted without actually deleting
+  --              Stop option processing (allow items starting with '-')
+  -h, --help      Show this help
+
+Examples:
+  rm_except important.txt myproject .git
+  rm_except -y --dry-run .gitignore README.md
+  rm_except -- -starting-with-dash
+EOF
+}
+
+# Parse arguments
+yes=0
+dry=0
+keep=()
+args=("$@")
+
+for ((i=0; i<${#args[@]}; i++)); do
+    arg="${args[i]}"
+    case "$arg" in
+        -h|--help) show_usage; exit 0 ;;
+        -y|--yes)  yes=1 ;;
+        --dry-run) dry=1 ;;
+        --)
+            for ((j=i+1; j<${#args[@]}; j++)); do
+                clean="${args[j]#./}"
+                clean="${clean%/}"
+                [[ -n "$clean" ]] && keep+=("$clean")
+            done
+            break
+            ;;
+        -*)
+            echo "Error: Unknown option '$arg'. Use --help." >&2
+            exit 1
+            ;;
+        *)
+            clean="${arg#./}"
+            clean="${clean%/}"
+            if [[ "$clean" == */* ]]; then
+                echo "Error: '$clean' contains '/'. Only top-level names allowed." >&2
+                exit 1
+            fi
+            [[ -n "$clean" ]] && keep+=("$clean")
+            ;;
+    esac
+done
+
+if [[ ${#keep[@]} -eq 0 ]]; then
+    echo "Error: No items specified to keep." >&2
+    show_usage
+    exit 1
+fi
+
+# Safety: refuse to run in dangerous directories
+curr_dir="$(pwd)"
+if [[ "$curr_dir" == "/" || "$curr_dir" == "$HOME" ]]; then
+    echo "Error: Refusing to run in $curr_dir for safety." >&2
+    exit 1
+fi
+
+# Build exclusion condition for `find`: -not \( -name item1 -o -name item2 -o ... \)
+exclude_conditions=()
+for k in "${keep[@]}"; do
+    exclude_conditions+=(-name "$k")
+    exclude_conditions+=(-o)
+done
+unset 'exclude_conditions[${#exclude_conditions[@]}-1]'  # remove last -o
+
+# Show what will be kept
+echo "=== Items to KEEP ==="
+printf '  %s\n' "${keep[@]}"
+
+# Show what will be deleted
+echo -e "\n=== Items that WILL BE DELETED ==="
+if [[ ${#exclude_conditions[@]} -eq 0 ]]; then
+    # No items to keep: delete everything
+    find . -mindepth 1 -maxdepth 1 -print
+else
+    find . -mindepth 1 -maxdepth 1 -not \( "${exclude_conditions[@]}" \) -print
+fi | sort
+
+if [[ $dry -eq 1 ]]; then
+    echo -e "\nDry-run completed. No files were deleted."
+    exit 0
+fi
+
+# Confirmation
+if [[ $yes -eq 0 ]]; then
+    if [[ -t 0 ]]; then
+        read -p "Confirm deletion? (y/N): " confirm
+        if [[ ! "$confirm" =~ ^[Yy]$ ]]; then
+            echo "Cancelled."
+            exit 0
+        fi
+    else
+        echo "Error: No terminal detected. Use -y to force deletion." >&2
+        exit 1
+    fi
+else
+    echo "Force mode (-y): proceeding with deletion..."
+fi
+
+# Perform deletion
+if [[ ${#exclude_conditions[@]} -eq 0 ]]; then
+    find . -mindepth 1 -maxdepth 1 -exec rm -rf {} +
+else
+    find . -mindepth 1 -maxdepth 1 -not \( "${exclude_conditions[@]}" \) -exec rm -rf {} +
+fi
+echo "Deletion completed."

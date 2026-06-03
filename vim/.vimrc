@@ -1,3 +1,5 @@
+" ~/.vimrc
+
 "显示行号
 set number
 "显示相对行号

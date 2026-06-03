@@ -1,0 +1,34 @@
+#!/usr/bin/env bash
+# clear_codex - Clear Codex cache directory
+# Usage: clear_codex
+
+set -euo pipefail
+
+# Get the directory where this script is located
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+RM_EXCEPT="$SCRIPT_DIR/rm_except"
+
+# Check rm_except exists and is executable
+if [[ ! -x "$RM_EXCEPT" ]]; then
+    echo "clear_codex: error - rm_except not found or not executable at $RM_EXCEPT" >&2
+    exit 1
+fi
+
+ORIG_DIR="$PWD"
+CODEX_HOME="$HOME/.codex"
+
+if [[ ! -d "$CODEX_HOME" ]]; then
+    echo "clear_codex: $CODEX_HOME not found" >&2
+    exit 1
+fi
+
+cd "$CODEX_HOME" || { echo "clear_codex: failed to cd into $CODEX_HOME" >&2; exit 1; }
+
+"$RM_EXCEPT" -y auth.json config.toml skills/ || {
+    echo "clear_codex: rm_except failed in $CODEX_HOME" >&2
+    cd "$ORIG_DIR"
+    exit 1
+}
+
+cd "$ORIG_DIR"
+echo "clear_codex: Codex history cleared successfully"
