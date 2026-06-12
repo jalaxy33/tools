@@ -31,46 +31,37 @@ skills来源：
 
 ## 我在用的一些skills
 
-### 开发工作流类
+### 信息获取类
 
-#### OpenSpec
+#### taviliy-search
 
-仓库地址：[Fission-AI/OpenSpec](https://github.com/Fission-AI/OpenSpec)
+仓库地址：[tavily-ai/skills - tavily-search](https://github.com/tavily-ai/skills/blob/main/skills/tavily-search/SKILL.md)
 
-这是一个 CLI 工具，提供了一套规范驱动开发（SDD）的工作流，用于解决AI编程中需求混乱、输出不可控的问题。用法参考[文档](https://github.com/Fission-AI/OpenSpec)。
-
-安装方法：
+借助 tavily CLI 联网搜索信息。首先需要申请一个 Tavily 的 [API Key](https://tavily.com/)，然后安装 CLI 工具：
 
 ```sh
-npm install -g @fission-ai/openspec@latest
+uv tool install tavily-cli   # or: pip install tavily-cli
 ```
 
-使用方法：
+进行验证：
 
-1. 进入工程目录，初始化：
+```sh
+tvly login --api-key tvly-YOUR_KEY
+# or: tvly login                      (opens browser for OAuth)
+# or: export TAVILY_API_KEY=tvly-...
+```
 
-   ```sh
-   cd your-project
-   openspec init
-   ```
+然后安装 skills：
 
-   根据提示进行操作，选择 `claude`，之后会在项目 `.claude` 目录下创建相关的 skills。
-
-2. 然后告诉 Agent 你的需求：
-
-   ```sh
-   /opsx:propose <what-you-want-to-build>
-   ```
-
-   之后根据提示进行操作。例如同意计划，进入实施阶段：`/opsx:approve`
-
-### 信息获取类
+```sh
+npx skills add tavily-ai/skills --skill tavily-search -g
+```
 
 #### opencli
 
 仓库地址：[jackwener/opencli](https://github.com/jackwener/opencli)
 
-这是一个 CLI 工具，可以让网站、浏览器会话、Electron 应用和本地工具转化为人类和 agent 访问的命令行接口，agent 可以用这个工具来从 bilibili、知乎、小红书等网站获取信息。
+Opencli 是一个 CLI 工具，可以让网站、浏览器会话、Electron 应用和本地工具转化为人类和 agent 访问的命令行接口，agent 可以用这个工具来从 bilibili、知乎、小红书等网站获取信息。
 
 opencli 提供了一系列 skill，使用前需要先安装 CLI 工具和浏览器插件。
 
@@ -102,10 +93,7 @@ opencli 提供了一系列 skill，使用前需要先安装 CLI 工具和浏览�
    或者只安装需要的
 
    ```sh
-   npx skills add jackwener/opencli --skill opencli-adapter-author
-   npx skills add jackwener/opencli --skill opencli-autofix
-   npx skills add jackwener/opencli --skill opencli-browser
-   npx skills add jackwener/opencli --skill opencli-usage
+   npx skills add jackwener/opencli --skill smart-search -g
    ```
 
 #### context7 (find-docs)
@@ -178,6 +166,61 @@ Anthropic 的官方 skill，用于创建新的 skills。
 
 ```sh
 npx skills add anthropics/skills --skill skill-creator
+```
+
+### 开发工作流类
+
+#### OpenSpec
+
+仓库地址：[Fission-AI/OpenSpec](https://github.com/Fission-AI/OpenSpec)
+
+这是一个 CLI 工具，提供了一套规范驱动开发（SDD）的工作流，用于解决AI编程中需求混乱、输出不可控的问题。用法参考[文档](https://github.com/Fission-AI/OpenSpec)。
+
+安装方法：
+
+```sh
+npm install -g @fission-ai/openspec@latest
+```
+
+使用方法：
+
+1. 进入工程目录，初始化：
+
+   ```sh
+   cd your-project
+   openspec init
+   ```
+
+   根据提示进行操作，选择 `claude`，之后会在项目 `.claude` 目录下创建相关的 skills。
+
+2. 然后告诉 Agent 你的需求：
+
+   ```sh
+   /opsx:propose <what-you-want-to-build>
+   ```
+
+   之后根据提示进行操作。例如同意计划，进入实施阶段：`/opsx:approve`
+
+### 多模态功能
+
+#### edge-tts
+
+仓库地址：[aahl/skills - edge-tts](https://github.com/aahl/skills/tree/main/skills/edge-tts)
+
+汇总信息，生成口播音频和 HTML 网页。安装方法：
+
+```sh
+npx skills add aahl/skills --skill edge-tts -g
+```
+
+#### hyperframes
+
+仓库地址：[heygen-com/hyperframes](https://github.com/heygen-com/hyperframes)
+
+用于制作视频，也可以用来生成 HTML 网页。安装方法：
+
+```sh
+npx skills add heygen-com/hyperframes --skill hyperframes -g
 ```
 
 ### 其他
