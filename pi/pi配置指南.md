@@ -66,7 +66,7 @@ bun add -g @earendil-works/pi-coding-agent
 
 ## 使用skills
 
-pi 能自动识别 `.agents/skills` 目录下的 skills。
+pi 能自动识别 `.agents/skills` 目录下的 skills。推荐的 skills 可以看[这篇文档](/claude/docs/skills推荐.md)。
 
 如果同时使用 claude，建议将 skills 统一放在 `~/.agents/skills/` 目录下，然后软链接到 `~/.claude/skills/` 中。
 
