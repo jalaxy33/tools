@@ -64,6 +64,30 @@ bun add -g @earendil-works/pi-coding-agent
   set -x KIMI_API_KEY "sk-cp-..."
   ```
 
+### 方式三：添加自定义提供商
+
+参考 [custom-provider](https://pi.dev/docs/latest/custom-provider) 文档，通过创建或修改 `~/.pi/agent/models.json` 添加自定义提供商。
+
+例如添加火山方舟的模型，用 `ARK_API_KEY` 环境变量来配置 api key：
+
+```json
+{
+  "providers": {
+    "ark": {
+      "baseUrl": "https://ark.cn-beijing.volces.com/api/coding",
+      "api": "anthropic-messages",
+      "apiKey": "$ARK_API_KEY",
+      "models": [
+        {
+          "id": "glm-5.1",
+          "reasoning": true
+        }
+      ]
+    }
+  }
+}
+```
+
 ## 使用skills
 
 pi 能自动识别 `.agents/skills` 目录下的 skills。推荐的 skills 可以看[这篇文档](/claude/docs/skills推荐.md)。
