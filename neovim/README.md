@@ -1,3 +1,4 @@
+# neovim学习记录
 
 [neovim](https://neovim.io/)（后面简称 nvim） 是一个更加现代化的vim。
 
