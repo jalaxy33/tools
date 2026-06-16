@@ -118,18 +118,4 @@ pi uninstall <extension-name>
 
 ## 我在用的一些扩展
 
-### 必要功能
-
-- [`pi-mcp-adapter`](https://www.npmjs.com/package/pi-mcp-adapter)：MCP适配器
-- [`pi-subagents`](https://www.npmjs.com/package/pi-subagents)：创建subagent
-- [`@plannotator/pi-extension`](https://www.npmjs.com/package/@plannotator/pi-extension)：提供计划模式。这个插件可以对计划文档进行划线批注。
-- [`@juicesharp/rpiv-ask-user-question`](https://www.npmjs.com/package/@juicesharp/rpiv-ask-user-question)：向用户询问具体细节
-- [`@juicesharp/rpiv-todo`](https://www.npmjs.com/package/@juicesharp/rpiv-todo)：todo 列表渲染
-- [`@rhedbull/pi-permissions`](https://www.npmjs.com/package/@rhedbull/pi-permissions)：提供类似于 claude code 的权限模式
-
-### 能力拓展
-
-- [`pi-web-access`](https://www.npmjs.com/package/pi-web-access)：联网搜索
-- [`@juicesharp/rpiv-btw`](https://www.npmjs.com/package/@juicesharp/rpiv-btw): 提供 `/btw` 命令。可以在主要任务执行过程中问一些无关的问题，对话不进入上下文。
-- [`context-mode`](https://www.npmjs.com/package/context-mode): 节约上下文
-- [`rtk`](https://github.com/rtk-ai/rtk)：节省执行 bash 命令时的 token 消耗，安装后使用 `rtk init --agent pi` 配置。
+可以看我的 [pi 配置仓库](https://github.com/jalaxy33/pi-dotfiles/tree/main#extension-list)。
