@@ -61,25 +61,6 @@ plugin 是将一系列 skills、MCP、hooks 打包在一起的工具集合。注
 /claude-hud:setup
 ```
 
-### context-mode
-
-仓库地址：[mksglu/context-mode](https://github.com/mksglu/context-mode)
-
-context-mode 是一个 MCP 服务器，用于节省上下文。
-
-安装步骤：
-
-```sh
-# 添加市场
-/plugin marketplace add mksglu/context-mode
-
-# 安装插件
-/plugin install context-mode@context-mode
-
-# 重新加载插件
-/reload-plugins
-```
-
 ### rtk
 
 仓库地址：[rtk-ai/rtk](https://github.com/rtk-ai/rtk)
