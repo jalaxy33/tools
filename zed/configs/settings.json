@@ -17,7 +17,7 @@
         "api_url": "https://api.minimaxi.com/v1",
         "available_models": [
           {
-            "name": "MiniMax-M2.7",
+            "name": "MiniMax-M3",
             "max_tokens": 200000,
             "max_output_tokens": 32000,
             "max_completion_tokens": 200000,
@@ -102,7 +102,7 @@
   "git_panel": {
     "status_style": "label_color",
     "file_icons": true,
-    "tree_view": true,
+    "tree_view": false,
     "dock": "left",
   },
   "project_panel": {

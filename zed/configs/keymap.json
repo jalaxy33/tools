@@ -70,5 +70,12 @@
     "bindings": {
       "/": "vim::SearchUnderCursorPrevious"
     }
+  },
+  // Delete without copy in helix mode
+  {
+    "context": "(vim_mode == helix_normal || vim_mode == helix_select  || vim_mode == insert || vim_mode == visual) && !menu",
+    "bindings": {
+      "alt-c": "vim::HelixSubstituteNoYank"
+    }
   }
 ]
