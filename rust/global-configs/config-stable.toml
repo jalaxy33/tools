@@ -1,0 +1,24 @@
+# Rust configs for `stable` toolchain
+# 
+# Put this at one of:
+#     ~/.cargo/config.toml
+#     <PROJECT_ROOT>/.cargo/config.toml
+
+
+#-- mirrors for CN user
+[source.crates-io]
+replace-with = 'ustc'
+
+[source.ustc]
+registry = "sparse+https://mirrors.ustc.edu.cn/crates.io-index/"
+
+[registries.ustc]
+index = "sparse+https://mirrors.ustc.edu.cn/crates.io-index/"
+
+
+
+#-- faster build
+
+# faster dev build
+[profile.dev]
+debug = "line-tables-only" 

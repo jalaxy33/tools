@@ -1,4 +1,11 @@
 # <PROJECT_ROOT>/rustfmt.toml
+#
+# Most feature works only on `nightly` toolchain. 
+#
+# Run formatting
+### cargo +nightly fmt
+
+style_edition = "2024"
 
 # imports
 imports_indent = "Visual"

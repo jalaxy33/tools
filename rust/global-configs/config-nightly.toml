@@ -9,6 +9,19 @@
 #     https://youtu.be/vFp4IbC2aZ0?si=u5absq9mDC2LkvoS 
 
 
+#--- General Settings ---
+
+# mirrors
+[source.crates-io]
+replace-with = 'ustc'
+
+[source.ustc]
+registry = "sparse+https://mirrors.ustc.edu.cn/crates.io-index/"
+
+[registries.ustc]
+index = "sparse+https://mirrors.ustc.edu.cn/crates.io-index/"
+
+
 
 #--- Nightly Only ---
 #
@@ -45,7 +58,6 @@ codegen-backend = true
 codegen-backend = "cranelift"
 # faster dev build (fewer debug info)
 debug = "line-tables-only"
-
 
 [profile.dev.package."*"]
 codegen-backend = "llvm"
