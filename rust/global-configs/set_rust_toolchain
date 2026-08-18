@@ -1,0 +1,132 @@
+#!/usr/bin/env bash
+#
+# set_rust_toolchain — Switch default Rust toolchain and sync ~/.cargo/config.toml
+#
+# Usage:
+#   ./set_rust_toolchain stable
+#   ./set_rust_toolchain nightly
+#   ./set_rust_toolchain cranelift
+#   ./set_rust_toolchain help
+#
+# Note: an argument is required (no default).
+#
+set -euo pipefail
+
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+CARGO_DIR="$HOME/.cargo"
+
+usage() {
+    cat <<'EOF'
+Usage: set_rust_toolchain <stable|nightly|cranelift>
+
+  stable      switch to stable
+  nightly     switch to nightly
+  cranelift   switch to nightly + enable cranelift codegen
+  help        show this help
+EOF
+}
+
+# ---------- validate argument ----------
+TOOLCHAIN="${1:-}"
+if [[ -z "$TOOLCHAIN" ]]; then
+    echo "Error: missing argument (choose: stable | nightly | cranelift)" >&2
+    usage >&2
+    exit 1
+fi
+case "$TOOLCHAIN" in
+    stable|nightly|cranelift) ;;
+    help|-h|--help)
+        usage
+        exit 0
+        ;;
+    *)
+        echo "Error: unknown argument '$TOOLCHAIN' (choose: stable | nightly | cranelift)" >&2
+        usage >&2
+        exit 1
+        ;;
+esac
+
+# ---------- print and run a command ----------
+run() {
+    echo "\$ $*"
+    "$@"
+}
+
+# ---------- ensure nightly is installed and is the default toolchain ----------
+# returns 1 (after falling back to stable) if the user declines to install
+ensure_nightly() {
+    if rustup toolchain list | grep -q '^nightly'; then
+        echo "==> nightly already installed"
+    else
+        echo "==> nightly not installed"
+        read -r -p "Install nightly? [Y/n] " answer
+        case "${answer:-y}" in
+            y|Y|yes|YES|Yes)
+                echo "==> Installing..."
+                run rustup toolchain install nightly
+                ;;
+            *)
+                echo "==> Skipping install, falling back to stable"
+                switch_to_stable
+                return 1
+                ;;
+        esac
+    fi
+    run rustup default nightly
+}
+
+# ---------- ensure the cranelift codegen component is installed ----------
+# returns 1 (after falling back to stable) if the user declines to install
+ensure_cranelift() {
+    if rustup component list --toolchain nightly --installed | grep -q cranelift; then
+        echo "==> cranelift already installed"
+    else
+        echo "==> cranelift not installed"
+        read -r -p "Install cranelift? [Y/n] " answer
+        case "${answer:-y}" in
+            y|Y|yes|YES|Yes)
+                echo "==> Installing..."
+                run rustup component add rustc-codegen-cranelift --toolchain nightly
+                ;;
+            *)
+                echo "==> Skipping install, falling back to stable"
+                switch_to_stable
+                return 1
+                ;;
+        esac
+    fi
+}
+
+# ---------- stable ----------
+switch_to_stable() {
+    echo "==> Switching to stable"
+    run rustup default stable
+    run cp "$SCRIPT_DIR/config-stable.toml" "$CARGO_DIR/config.toml"
+    echo "==> Done: $(rustup default)"
+}
+
+# ---------- nightly ----------
+switch_to_nightly() {
+    echo "==> Switching to nightly"
+    ensure_nightly || return
+    run cp "$SCRIPT_DIR/config-nightly.toml" "$CARGO_DIR/config.toml"
+    echo "==> Done: $(rustup default)"
+}
+
+# ---------- nightly + cranelift ----------
+switch_to_cranelift() {
+    echo "==> Switching to nightly + cranelift"
+    ensure_nightly || return
+    ensure_cranelift || return
+    run cp "$SCRIPT_DIR/config-cranelift.toml" "$CARGO_DIR/config.toml"
+    echo "==> Done: $(rustup default)"
+}
+
+# ---------- main ----------
+mkdir -p "$CARGO_DIR"
+
+case "$TOOLCHAIN" in
+    stable)    switch_to_stable ;;
+    nightly)   switch_to_nightly ;;
+    cranelift) switch_to_cranelift ;;
+esac

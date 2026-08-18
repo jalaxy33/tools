@@ -1,4 +1,4 @@
-# Rust configs for `nightly` toolchain
+# Rust configs for `cranelift` code-generator (Nightly Only)
 # 
 # Put this at one of:
 #     ~/.cargo/config.toml
@@ -20,12 +20,6 @@ registry = "sparse+https://mirrors.ustc.edu.cn/crates.io-index/"
 
 [registries.ustc]
 index = "sparse+https://mirrors.ustc.edu.cn/crates.io-index/"
-
-
-#-- faster build
-# faster dev build
-[profile.dev]
-debug = "line-tables-only" 
 
 
 #-- Faster Linker
@@ -58,4 +52,22 @@ rustflags = [
   # (Nightly) Make the current crate share its generic instantiations
   "-Zshare-generics=y",
 ]
+
+
+#-- Faster Code Generator
+# install `cranelift` (Nightly)
+### rustup component add rustc-codegen-cranelift-preview --toolchain nightly 
+#
+[unstable]
+codegen-backend = true
+
+[profile.dev]
+# switch codegen-backend to cranelift (Nightly)
+codegen-backend = "cranelift"
+# faster dev build (fewer debug info)
+debug = "line-tables-only"
+
+[profile.dev.package."*"]
+codegen-backend = "llvm"
+
 
