@@ -30,65 +30,15 @@ function Command-Exist {
     Get-Command $name -ErrorAction SilentlyContinue
 }
 
-# rm_except: remove all files and directories in the current directory except specified ones
-function Remove-Except {
+
+function Init-App {
     param(
-        [switch]$Yes,      # -y or --yes → skip confirmation
-        [switch]$DryRun    # --dry-run → only preview
+        [string]$CommandName,
+        [scriptblock]$Initialization
     )
-
-    # Collect items to keep (all non-switch arguments)
-    $keep = @($args | ForEach-Object {
-        $clean = $_.TrimStart('.\').TrimEnd('\','/')
-        if ($clean) { $clean }
-    })
-
-    if ($keep.Count -eq 0) {
-        Write-Host "Usage: Remove-Except [-Yes] [-DryRun] item1 [item2 ...]" -ForegroundColor Yellow
-        Write-Host "       Supports: Remove-Except important.txt myproject .git" -ForegroundColor Yellow
-        Write-Host "       Also supports paths: Remove-Except subdir/keep.txt" -ForegroundColor Yellow
-        Write-Host "Example: Remove-Except -Yes .git README.md" -ForegroundColor Yellow
-        return
+    if (Command-Exist $CommandName) {
+        Invoke-Expression (& $Initialization)
     }
-
-    Write-Host "=== Items to KEEP ===" -ForegroundColor Green
-    $keep | ForEach-Object { Write-Host "  $_" }
-
-    Write-Host "`n=== Items that WILL BE DELETED ===" -ForegroundColor Red
-
-    # Build filter: exclude items to keep
-    $toDelete = Get-ChildItem -Path . -Force | Where-Object {
-        $itemName = $_.Name
-        $itemFull = $_.FullName.Replace((Get-Location).Path + '\', '').Replace('\', '/')
-
-        -not ($keep -contains $itemName -or $keep -contains $itemFull)
-    }
-
-    $toDelete | Sort-Object -Property FullName | ForEach-Object {
-        Write-Host "  $($_.FullName.Replace((Get-Location).Path + '\', ''))"
-    }
-
-    if ($DryRun) {
-        Write-Host "`nDry-run completed. No items were deleted." -ForegroundColor Cyan
-        return
-    }
-
-    if (-not $Yes) {
-        $confirm = Read-Host "`nConfirm deletion? (y/N)"
-        if ($confirm -notmatch '^[Yy]$') {
-            Write-Host "Cancelled." -ForegroundColor Yellow
-            return
-        }
-    } else {
-        Write-Host "Force mode (-Yes): proceeding with deletion..." -ForegroundColor Magenta
-    }
-
-    # Perform deletion (delete deeper items first to avoid container issues)
-    $toDelete | Sort-Object -Property FullName -Descending | ForEach-Object {
-        Remove-Item -Path $_.FullName -Recurse -Force -ErrorAction SilentlyContinue
-    }
-
-    Write-Host "Deletion completed." -ForegroundColor Green
 }
 
 
@@ -113,9 +63,9 @@ Set-PSReadLineKeyHandler -Chord Tab -ScriptBlock {
 
 ## --- init apps ---
 
-if (Command-Exist starship) { Invoke-Expression (&starship init powershell) }
-if (Command-Exist scoop-search) { Invoke-Expression (&scoop-search --hook) }
-if (Command-Exist zoxide) { Invoke-Expression (& { (zoxide init powershell | Out-String) }) }
+Init-App starship { starship init powershell }
+Init-App scoop-search { scoop-search --hook }
+Init-App zoxide { (zoxide init powershell | Out-String) }
 
 
 ## --- alias --- 
@@ -188,16 +138,6 @@ function unset_proxy {
     if (Command-Exist scoop) {
         scoop config rm proxy
     }
-}
-
-
-# -- claude
-function clear_claude() {
-    $work_dir = $PWD.Path
-    cd $HOME/.claude
-    Remove-Except -Yes settings.json config.json .credentials.json plugins skills
-    cd $work_dir
-    Write-Host "claude history cleared." -ForegroundColor Green
 }
 
 
