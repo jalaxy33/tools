@@ -4,6 +4,18 @@
 
 ### pytorch使用国内源
 
+#### 方法一. 指定 torch-backend
+
+在项目的 `pyproject.toml` 中添加：
+
+```toml
+[tool.uv]
+torch-backend = "auto"
+```
+
+
+#### 方法二. 指定 torch 下载源
+
 在项目的 `pyproject.toml` 中添加：
 
 ```toml
